@@ -1,0 +1,35 @@
+- name: Add ROS's APT repo key
+  become: yes
+  ansible.builtin.apt_key:
+    url: https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc
+    id: C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654
+
+- name: Add ROS's APT repository
+  become: yes
+  ansible.builtin.apt_repository:
+    repo: deb http://packages.ros.org/ros/ubuntu bionic main
+
+- name: Install ROS packages
+  become: yes
+  apt:
+    update_cache: yes
+    name:
+      - ros-melodic-desktop-full
+      - ros-melodic-uuv-simulator
+      - python3-catkin-tools
+
+- name: Install other packages
+  become: yes
+  apt:
+    update_cache: yes
+    name:
+      - python2.7
+      - python-pip
+      - mesa-utils
+      - python-pygame
+
+- name: Install Python packages
+  pip:
+    executable: pip2
+    name:
+      - rospkg

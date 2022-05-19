@@ -1,0 +1,4 @@
+- name: Include ROS
+  include: ros.yaml
+- name: Include setup of workspace
+  include: config.yaml

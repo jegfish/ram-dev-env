@@ -1,0 +1,16 @@
+- name: Add user to necessary groups for accessing serial ports
+  become: yes
+  user:
+    name: "{{ ansible_user_id }}"
+    append: yes
+    groups: dialout
+
+- name: Install R@M embedded packages
+  become: yes
+  apt:
+    update_cache: yes
+    name:
+      - screen
+      - openocd
+      - lm4flash
+      - astyle # code auto-formatter

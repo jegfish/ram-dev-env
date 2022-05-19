@@ -1,0 +1,9 @@
+- name: Ensure ssh directory exists
+  file:
+    path: ~/.ssh
+    state: directory
+
+- name: Generate an SSH keypair for authenticating with GitLab
+  community.crypto.openssh_keypair:
+    path: ~/.ssh/id-ram_ed25519
+    type: ed25519

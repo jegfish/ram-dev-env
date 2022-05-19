@@ -1,0 +1,2 @@
+- name: Include SSH key setup
+  include: ssh.yaml
