@@ -10,6 +10,9 @@
 - Ansible
   - An Ansible playbook will describe the desired state of the system
   - Will be installed on the image, and run against localhost.
+  - NOTE: `ansible-pull` may be very convenient if we don't have a VM
+    image to start out with. Could be part of a simple script or set
+    of commands we have people run to get started.
 - ? Further custom commands
   - [ ] Update / re-run playbook
 - [ ] ISO / virtual machine image
