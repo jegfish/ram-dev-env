@@ -16,3 +16,12 @@ development environment for Robotics at Maryland.
   - TODO When trying to clone code repos, if authentication error again ask user
     to upload the key
   - TODO ? Copy to clipboard? Print to terminal to have user select and copy?
+
+# Issues
+
+## `Failed to connect socket to '/var/run/libvirt/virtnetworkd-sock-ro': No such file or directory`
+`systemctl start libvirtd`
+`systemctl start virtnetworkd`
+
+## NFS mount issues on Fedora
+<https://developer.fedoraproject.org/tools/vagrant/vagrant-nfs.html>
