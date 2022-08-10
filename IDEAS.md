@@ -38,3 +38,25 @@
 - GCC ARM embedded compiler toolchain
 - lm4flash (https://github.com/utzig/lm4tools)
   - Ubuntu: lm4flash
+
+# Improvements
+
+## Speed up
+
+Anything that can be done ahead of time, do so.
+Build things like package installs into the source Vagrant box.
+Then only for things that have to be unique do them on the user's machine, like generate an SSH key.
+
+Maybe could be done by: `config.vm.provision "preload-box"`
+
+Add an extra provision option, then `vagrant provision --provision-with preload-box`.
+Then `vagrant package` or whatever to make a custom box.
+Split the Ansible playbook into portions that can be done ahead of time and those that must be done on individual users' machines.
+If doesn't make sense to fully split up, use Ansible tags so we can prevent the just-in-time stuff from running.
+
+# Maybe
+
+## Only regenerate SSH keys if necessary.
+Use SSH key that person already has if possible.
+
+Note: Only an issue if destroying and recreating the development environment often.

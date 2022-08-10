@@ -71,6 +71,12 @@ Vagrant.configure("2") do |config|
   #   apt-get install -y apache2
   # SHELL
   config.vm.provision "ansible_local" do |ansible|
-    ansible.playbook = "./ansible/playbook.yaml"
+    ansible.playbook = "ansible/playbook.yaml"
+    ansible.galaxy_role_file = "ansible/requirements.yaml"
+    ansible.galaxy_command = "ansible-galaxy collection install --requirements-file=%{role_file} --force"
+    ansible.inventory_path = "ansible/hosts"
+    ansible.limit = "local"
+    # https://www.whatan00b.com/posts/debugging-a-segfault-from-ansible/
+    # ansible.playbook_command = "no_proxy='*' ansible-playbook"
   end
 end

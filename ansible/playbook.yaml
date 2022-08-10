@@ -13,6 +13,6 @@
 - name: Run playbook
   hosts: local
   roles:
-    - role: init
     - role: embedded
     - role: software
+    - role: git

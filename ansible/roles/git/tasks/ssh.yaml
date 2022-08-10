@@ -3,7 +3,7 @@
     path: ~/.ssh
     state: directory
 
-- name: Generate an SSH keypair for authenticating with GitLab
+- name: Generate an SSH keypair for authenticating with Git remote
   community.crypto.openssh_keypair:
     path: ~/.ssh/id-ram_ed25519
     type: ed25519

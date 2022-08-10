@@ -1,0 +1,3 @@
+# Install additonal features from Ansible Galaxy.
+collections:
+  - name: community.crypto
