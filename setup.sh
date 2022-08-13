@@ -26,4 +26,10 @@ python3.8 -m pip install ansible
 
 ### END prerequisites
 
-~/.local/bin/ansible-playbook --inventory "${ansible_root}/hosts" "${ansible_root}/playbook.yaml"
+# For now the password will just be hard-coded as 'password'.
+# We are assuming that the password on an account in a virtual machine doesn't matter much.
+# If setup SSH should disable password authentication.
+# If setup any other services that should be accessible from outside the VM locally, secure it somehow.
+# If setup services that should be accessible from outside the VM from the network, definitely secure it somehow.
+# Eventually we may include changing the password as a post-installation step.
+~/.local/bin/ansible-playbook --inventory "${ansible_root}/hosts" "${ansible_root}/playbook.yaml" --extra-vars='ansible_become_pass=password'
