@@ -54,6 +54,12 @@ Then `vagrant package` or whatever to make a custom box.
 Split the Ansible playbook into portions that can be done ahead of time and those that must be done on individual users' machines.
 If doesn't make sense to fully split up, use Ansible tags so we can prevent the just-in-time stuff from running.
 
+## Investigate networking options.
+
+Make sure the VM networking is secure.
+Don't expose open ports on VM to the local network.
+They should only be exposed locally on the host OS.
+
 # Maybe
 
 ## Only regenerate SSH keys if necessary.
