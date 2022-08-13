@@ -15,7 +15,7 @@
     of commands we have people run to get started.
   - [ ] Don't ask to upload SSH keys to GitLab every time. Save whether we've already ask to a file, and check that file.
 - ? Further custom commands
-  - [ ] Update / re-run playbook
+  - [x] Update / re-run playbook
   - [ ] Command to run 'git fetch' on all repositories so ready to go offline.
 - [ ] ISO / virtual machine image
   - ? Automatically generate
