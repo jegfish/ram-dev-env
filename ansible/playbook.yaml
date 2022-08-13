@@ -1,15 +1,3 @@
-# - name: Prompt
-#   hosts: all
-#   vars_prompt:
-#     - name: username
-#       prompt: What is your username?
-#       default: "ram"
-#       private: no
-
-# - name: Debug output
-#   ansible.builtin.debug:
-#     msg: "Hello"
-
 - name: Run playbook
   hosts: local
   vars:
