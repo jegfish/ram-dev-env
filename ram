@@ -11,12 +11,12 @@ usage() {
     cat <<EOF
 usage: $0
 
-    $0 setup
-      Ensures that your Robotics at Maryland development environment is setup.
-    $0 provision
-      Run the Ansible playbook, skipping tasks tagged with 'postinstall'. Intended to be used when creating a base VM image to distribute to others.
-    $0 clean-image
-      For running after provisioning with the intent of distributing the VM image to others. Removes things such as shell history files.
+  $0 setup
+    Ensures that your Robotics at Maryland development environment is setup.
+  $0 provision
+    Run the Ansible playbook, skipping tasks tagged with 'postinstall'. Intended to be used when creating a base VM image to distribute to others.
+  $0 clean-image
+    For running after provisioning with the intent of distributing the VM image to others. Removes things such as shell history files.
 EOF
 }
 
