@@ -1,0 +1,4 @@
+- name: Include SSH key setup
+  include_tasks: ssh.yaml
+- name: Include downloading of project source code
+  include_tasks: clone.yaml

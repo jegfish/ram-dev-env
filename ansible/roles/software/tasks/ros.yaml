@@ -9,16 +9,19 @@
   ansible.builtin.apt_repository:
     repo: deb http://packages.ros.org/ros/ubuntu bionic main
 
-- name: Update apt cache
-  become: yes
-  apt:
-    update_cache: yes
+# - name: Update apt cache
+#   become: yes
+#   apt:
+#     update_cache: yes
 
 # The next few are large installs, so do them one at a time so have a better feeling for current progress.
 
 - name: Install ros-melodic-desktop-full
   become: yes
   apt:
+    # Update apt cache because just added ROS repo.
+    # It will always run `apt update` so to save time we only update it on this first ROS install task.
+    update_cache: yes
     name:
       - ros-melodic-desktop-full
 

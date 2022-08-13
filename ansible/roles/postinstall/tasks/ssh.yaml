@@ -1,0 +1,20 @@
+- name: Ensure ssh directory exists
+  file:
+    path: ~/.ssh
+    state: directory
+
+- name: Generate an SSH keypair for authenticating with Git remote
+  community.crypto.openssh_keypair:
+    path: "{{ ssh_keypair_path }}"
+    type: ed25519
+
+- name: Configure SSH client
+  ansible.builtin.blockinfile:
+    path: ~/.ssh/config
+    create: yes
+    marker: "# {mark} ANSIBLE MANAGED BLOCK"
+    block: |
+      Host gitlab.com
+          HostName gitlab.com
+          IdentityFile {{ ssh_keypair_path }}
+      

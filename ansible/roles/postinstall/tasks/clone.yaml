@@ -1,0 +1,40 @@
+- name: Showing your SSH public key
+  block:
+    - name: Get SSH public key
+      ansible.builtin.command: "cat {{ ssh_keypair_path }}.pub"
+      register: pubkey
+      changed_when: False
+    - name: Print public key
+      ansible.builtin.debug:
+        msg: "Your public key is: '{{ pubkey.stdout }}'"
+    
+- name: Please upload your SSH public key to GitLab
+  ansible.builtin.pause:
+    prompt: |
+      PAUSE: Please upload your SSH public key to GitLab now. You will not be able to access the R@M project source code without doing so.
+      You can do so at https://gitlab.com/-/profile/keys.
+      Once you have done so, press enter/return to continue.
+
+# 'update: no' so that we do not run 'git pull'.
+# I believe Ansible does not try to pull when there are changes to the working directory, but either way this prevents unexpected operations.
+
+- name: Clone Jetson Git repo
+  ansible.builtin.git:
+    repo: 'git@gitlab.com:robotics-at-maryland/software/qubo_jetson.git'
+    dest: ~/qubo/src/qubo_jetson
+    update: no
+    accept_newhostkey: yes
+
+- name: Clone Gazebo simulation Git repo
+  ansible.builtin.git:
+    repo: 'git@gitlab.com:robotics-at-maryland/software/qubo_gazebo.git'
+    dest: ~/qubo/src/qubo_gazebo
+    update: no
+    accept_newhostkey: yes
+  
+- name: Clone embedded software Git repo
+  ansible.builtin.git:
+    repo: 'git@gitlab.com:robotics-at-maryland/software/qubo-embedded.git'
+    dest: ~/qubo/src/qubo_embedded
+    update: no
+    accept_newhostkey: yes

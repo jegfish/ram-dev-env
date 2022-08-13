@@ -12,7 +12,9 @@
 
 - name: Run playbook
   hosts: local
+  vars:
+    ssh_keypair_path: '~/.ssh/id-ram_ed25519'
   roles:
-    - role: embedded
     - role: software
-    - role: git
+    - role: postinstall
+      tags: [ postinstall ]

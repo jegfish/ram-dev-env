@@ -1,0 +1,81 @@
+#!/bin/sh
+set -e
+
+die() {
+    ret=$?
+    printf "fatal error: %s\\n" "$@" >&2
+    exit $ret
+}
+
+usage() {
+    cat <<EOF
+usage: $0
+
+    $0 setup
+      Ensures that your Robotics at Maryland development environment is setup.
+    $0 provision
+      Run the Ansible playbook, skipping tasks tagged with 'postinstall'. Intended to be used when creating a base VM image to distribute to others.
+    $0 clean-image
+      For running after provisioning with the intent of distributing the VM image to others. Removes things such as shell history files.
+EOF
+}
+
+ensure_ansible() {
+    ### BEGIN prerequisites
+
+    # python3.8: required for Ansible
+    # rustc, cargo: required for building Ansible pip packages or its dependencies
+    sudo apt install -y python3.8 python3-pip rustc cargo
+
+    # upgrade pip
+    python3.8 -m pip install -U pip
+
+    ### END prerequisites
+
+    python3.8 -m pip install ansible
+}
+
+check_os() {
+    [ "$(lsb_release --short --id)" = 'Ubuntu' ] || die "This script performs installation. It is only intended to be run on Ubuntu."
+    [ "$(lsb_release --short --codename)" = 'bionic' ] || die "This script performs instllation. It is only intended to be run on Ubuntu, specifically 18.04 LTS Bionic Beaver."
+}
+
+# Some sanity checks.
+
+script_root="$(dirname -- "$0")"
+ansible_root="${script_root}/ansible"
+
+[ -d "${ansible_root}" ] || die "Did not find directory '${ansible_root}'. \
+Check that the script is in the correct directory."
+
+check_os
+
+# For now the password will just be hard-coded as 'password'.
+# We are assuming that the password on an account in a virtual machine doesn't matter much.
+# If setup SSH should disable password authentication.
+# If setup any other services that should be accessible from outside the VM locally, secure it somehow.
+# If setup services that should be accessible from outside the VM from the network, definitely secure it somehow.
+# Eventually we may include changing the password as a post-installation step.
+
+case "$1" in
+    provision)
+        ensure_ansible
+        ~/.local/bin/ansible-playbook --skip-tags postinstall --inventory "${ansible_root}/hosts" "${ansible_root}/playbook.yaml" --extra-vars='ansible_become_pass=password'
+        ;;
+    setup)
+        ensure_ansible
+        ~/.local/bin/ansible-playbook --inventory "${ansible_root}/hosts" "${ansible_root}/playbook.yaml" --extra-vars='ansible_become_pass=password'
+        ;;
+    clean-image)
+        # Clear history.
+        bash -i -c 'history -c && history -w'
+        rm -f ~/.lesshst
+
+        rm -f ~/.sudo_as_admin_successful
+
+        rm -rf ~/.cache
+        ;;
+    *)
+        usage
+        ;;
+esac
