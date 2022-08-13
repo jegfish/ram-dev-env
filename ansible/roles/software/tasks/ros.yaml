@@ -9,19 +9,34 @@
   ansible.builtin.apt_repository:
     repo: deb http://packages.ros.org/ros/ubuntu bionic main
 
-- name: Install ROS packages
+- name: Update apt cache
   become: yes
   apt:
     update_cache: yes
+
+# The next few are large installs, so do them one at a time so have a better feeling for current progress.
+
+- name: Install ros-melodic-desktop-full
+  become: yes
+  apt:
     name:
       - ros-melodic-desktop-full
+
+- name: Install ros-melodic-uuv-simulator
+  become: yes
+  apt:
+    name:
       - ros-melodic-uuv-simulator
+
+- name: Install python3-catkin-tools
+  become: yes
+  apt:
+    name:
       - python3-catkin-tools
 
 - name: Install other packages
   become: yes
   apt:
-    update_cache: yes
     name:
       - python2.7
       - python-pip
