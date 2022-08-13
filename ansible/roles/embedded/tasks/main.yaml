@@ -1,2 +1,2 @@
 - name: Include embedded
-  include: embedded.yaml
+  include_tasks: embedded.yaml

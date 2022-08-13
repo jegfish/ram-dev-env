@@ -1,4 +1,4 @@
 - name: Include ROS
-  include: ros.yaml
+  include_tasks: ros.yaml
 - name: Include setup of workspace
-  include: config.yaml
+  include_tasks: config.yaml
