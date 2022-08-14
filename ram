@@ -68,12 +68,10 @@ case "$1" in
         ;;
     clean-image)
         # Clear history.
-        bash -i -c 'history -c && history -w'
         rm -f ~/.lesshst
-
         rm -f ~/.sudo_as_admin_successful
-
-        rm -rf ~/.cache
+        rm -f ~/.cache/motd.legal-displayed
+        echo "To clear Bash shell history and quit, run 'history -c && history -w && exit'."
         ;;
     *)
         usage
