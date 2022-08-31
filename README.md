@@ -1,20 +1,103 @@
- # Table of Contents
+# Table of Contents
 
 # Development Environment Setup Instructions
 
-Follow these instructions to setup a [virtual machine](https://simple.wikipedia.org/wiki/Virtual_machine)
+Follow these instructions to setup a [virtual machine](https://simple.wikipedia.org/wiki/Virtual_machine) (VM)
 development environment for Robotics at Maryland.
 
 NOTE: The configuration automation in this repository is meant for running on a virtual machine.
 There is currently no automated *un*install process, and few customization options.
 If you wish to set this up on a regular non-VM Ubuntu Linux install, do so at your own risk.
 
-## 1: Install virtual machine software
-## 2: Create virtual machine for Robotics at Maryland
+## 1: Setup virtual machine software
 
-- TODO Ideally members should not have to go through the Ubuntu install process
+Take your pick of VM software.
 
-## 3: Log in to the virtual machine
+First, we'll note special circumstances that will restrict your options:
+
+- If you are using an Apple Mac computer with an Apple silicon ARM chip, there are fewer available options:
+  - UTM. Open source software and no monetary cost.
+  - VMWare Fusion supports M1 Macs now. Free for UMD students.
+  - Parallels is paid software, with a student discount.
+
+Now, we will list some pros and cons:
+
+- VMWare
+  - pro: UMD provides free access to VMWare Workstation (for Windows and Linux) and VMWare Fusion (for Macs) for students
+  - Runs on Windows, Linux, and Mac OS X (Intel and ARM)
+- VirtualBox
+  - pro: Free.
+  - pro: Mostly open source.
+  - con: Some additional useful features may require 
+  - Runs on Linux, Windows, and Mac OS X (Intel)
+- QEMU
+  - QEMU is just the underlying technology, there are various frontends for controlling it.
+    We will just provide instructions for using the virt-manager GUI frontend.
+  - Mainly useful on Linux.
+- UTM
+  - pro: Free.
+  - Runs on Mac OS X (Intel and ARM)
+- Parallels
+  - pro: Supposedly very easy to use.
+  - con: Paid. $100 one-time for one type of license that looks suitable. Subscription $100/year for extra features, with student discount to $50/year.
+  - Runs on Mac OS X (Intel and ARM)
+
+Jump to the instructions for your VM software:
+
+If there are no instructions for your desired VM software, you can probably still use it, and we will try our best to help you.
+However if you are not familiar with VM software, it would probably be best that you use one that we list so that we can more easily help you if you run into problems.
+If you are willing, please contribute instructions for additional VM software.
+
+- [VMWare](#vmware)
+- [VirtualBox](#virtualbox)
+- [virt-manager](#virt-manager)
+- [UTM](#utm)
+
+### VMWare
+
+#### Installing
+
+1. Go to TerpWare: https://terpware.umd.edu
+   - VMWare Academic Software is listed under the "Utilities" category.
+2. Go through the process of registering for and installing VMWare.
+   - VMWare Workstation is for Windows and Linux
+   - VMWare Fusion is for Intel-based Macs, but may have a version for Apple ARM CPUs.
+
+#### Creating the VM
+
+**TODO**
+
+### VirtualBox
+
+#### Installing
+
+**TODO**
+
+#### Creating the VM
+
+**TODO**
+
+### virt-manager
+
+#### Installing
+
+**TODO**
+
+#### Creating the VM
+
+**TODO**
+
+### UTM
+
+#### Installing
+
+**TODO**
+
+#### Creating the VM
+
+**TODO**
+
+## 2: Log in to the virtual machine
 
 The default password is "password".
 The thinking is that access to your VM is protected by your computer's password and lockscreen.

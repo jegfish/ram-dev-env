@@ -1,22 +1,20 @@
 # Architecture / Ideas
 
-- Initial setup script/wizard
-  - May be as simple as running the Ansible playbook, but there is a possibility
-    we will want to do some things in the setup wizard rather than the Ansible
-    playbook, e.g. interactivity/prompts.
-  - [ ] Should be able to change mind on answers to prompts
-    - At least should support quitting and restarting the setup process
-  - [X] Install Ansible
+- VM software
+  - Vagrant makes things really easy, but I couldn't get it working.
+    For now I will focus on just the automation once you have Ubuntu installed, and creating base images for popular VM software so people don't have to go through the Ubuntu install process.
 - Ansible
-  - An Ansible playbook will describe the desired state of the system
-  - Will be installed on the image, and run against localhost.
-  - NOTE: `ansible-pull` may be very convenient if we don't have a VM
-    image to start out with. Could be part of a simple script or set
-    of commands we have people run to get started.
   - [ ] Don't ask to upload SSH keys to GitLab every time. Save whether we've already ask to a file, and check that file.
 - ? Further custom commands
   - [x] Update / re-run playbook
   - [ ] Command to run 'git fetch' on all repositories so ready to go offline.
+- Desktop environment
+  - Do we need one?
+    - Maybe can get by just with X forwarding or similar.
+      There aren't that many GUI programs we run, so avoiding having to learn a new desktop environment would be nice.
+  - If we do use one, probably just the default Ubuntu.
+    It's what people are most likely (of the options, it's Linux) to have been exposed to.
+    It's easy for new people to use.
 - [ ] ISO / virtual machine image
   - ? Automatically generate
     - Would be nice to at least not require people to go through the Linux
