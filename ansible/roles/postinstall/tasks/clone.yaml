@@ -6,13 +6,12 @@
       changed_when: False
     - name: Print public key
       ansible.builtin.debug:
-        msg: "Your public key is: '{{ pubkey.stdout }}'"
+        msg: "Open https://gitlab.com/-/profile/keys in your browser. Your public key is: '{{ pubkey.stdout }}'"
     
 - name: Please upload your SSH public key to GitLab
   ansible.builtin.pause:
     prompt: |
       PAUSE: Please upload your SSH public key to GitLab now. You will not be able to access the R@M project source code without doing so.
-      You can do so at https://gitlab.com/-/profile/keys.
       Once you have done so, press enter/return to continue.
 
 # 'update: no' so that we do not run 'git pull'.
