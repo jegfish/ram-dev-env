@@ -14,7 +14,13 @@
     create: yes
     marker: "# {mark} ANSIBLE MANAGED BLOCK"
     block: |
+      # Share auth between SSH sessions. Don't have to authenticate again if you already have an open session.
+      Host *
+          ControlMaster auto
+          ControlPath ~/.ssh/ssh_mux_%h_%p_%r
+          
       Host gitlab.com
           HostName gitlab.com
           IdentityFile {{ ssh_keypair_path }}
+          
       
