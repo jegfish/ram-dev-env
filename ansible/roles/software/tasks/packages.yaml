@@ -1,0 +1,12 @@
+# Miscellaneous packages.
+# e.g. various text editors and useful utilities people may want to use.
+
+- name: Install miscellaneous packages
+  become: yes
+  apt:
+    name:
+      - vim
+      - neovim
+      - emacs
+      - nano
+      - magic-wormhole

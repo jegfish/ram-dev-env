@@ -8,6 +8,8 @@
     path: '~/.bashrc'
     marker: "# {mark} ANSIBLE MANAGED BLOCK"
     block: |
+      export PATH="$PATH:$HOME/.dev-env/bin"
+      
       export QUBO_PATH=~/qubo
       export GAZEBO_MODEL_PATH="$QUBO_PATH/src/qubo_gazebo/nbrf:$GAZEBO_MODEL_PATH"
       source "$QUBO_PATH/devel/setup.bash"

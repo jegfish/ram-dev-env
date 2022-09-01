@@ -27,13 +27,11 @@ Now, we will list some pros and cons:
   - Runs on Windows, Linux, and Mac OS X (Intel and ARM)
 - VirtualBox
   - pro: Free.
-  - pro: Mostly open source.
-  - con: Some additional useful features may require 
   - Runs on Linux, Windows, and Mac OS X (Intel)
 - QEMU
   - QEMU is just the underlying technology, there are various frontends for controlling it.
     We will just provide instructions for using the virt-manager GUI frontend.
-  - Mainly useful on Linux.
+  - Mainly useful on Linux, though does run on other OSes.
 - UTM
   - pro: Free.
   - Runs on Mac OS X (Intel and ARM)
@@ -142,7 +140,11 @@ Currently we are using Ubuntu 18.04 LTS, and the configuration automation is tar
 If you want to use a newer version of Ubuntu or a different operating system, the Ansible playbook needs to be updated or extended to support that operating system.
 For a newer Ubuntu version, it may just require testing that the Ansible playbook still works, but it also may require modifying the playbook.
 
-Name the user you create during the installation "ram", and give it the default password of "password".
+You can use the GUI installer or the server ISO with a TUI installer, whichever you prefer.
+Do not use a special Ubuntu flavor (in order to do so you would have to change the playbook to not install `ubuntu-desktop`).
+The default Ubuntu desktop environment will be installed by the Ansible playbook regardless.
+
+Name the user you create during the installation "ram", and give it the default password of "password". Make sure it has permission to `sudo` to escalate to root privileges.
 
 ### Clone Git repo
 

@@ -1,0 +1,7 @@
+# GUI installation and configuration.
+
+- name: Install Ubuntu desktop environment
+  become: yes
+  apt:
+    name:
+      - ubuntu-desktop

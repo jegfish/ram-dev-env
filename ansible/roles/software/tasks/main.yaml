@@ -4,3 +4,7 @@
   include_tasks: embedded.yaml
 - name: Include setup of workspace
   include_tasks: config.yaml
+- name: Include GUI installation and configuration
+  include_tasks: gui.yaml
+- name: Include installation of miscellaneous packages
+  include_tasks: packages.yaml
