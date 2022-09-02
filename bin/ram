@@ -42,7 +42,7 @@ check_os() {
 
 # Some sanity checks.
 
-script_root="$(dirname -- "$0")"
+script_root="$(dirname -- "$0")/.."
 ansible_root="${script_root}/ansible"
 
 [ -d "${ansible_root}" ] || die "Did not find directory '${ansible_root}'. \
