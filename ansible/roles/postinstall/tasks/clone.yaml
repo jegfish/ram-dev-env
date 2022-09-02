@@ -11,7 +11,8 @@
 - name: Please upload your SSH public key to GitLab
   ansible.builtin.pause:
     prompt: |
-      PAUSE: Please upload your SSH public key to GitLab now. You will not be able to access the R@M project source code without doing so.
+      PAUSE: Please upload your SSH public key to GitLab now. The required information is printed above.
+      You will not be able to access the R@M project source code without doing so.
       Once you have done so, press enter/return to continue.
 
 # 'update: no' so that we do not run 'git pull'.
