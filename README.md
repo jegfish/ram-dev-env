@@ -234,3 +234,35 @@ Formats:
 
 ## NFS mount issues on Fedora
 <https://developer.fedoraproject.org/tools/vagrant/vagrant-nfs.html>
+# Tips
+## Arm GNU Toolchain
+
+This is the compiler we use for the Tiva.
+
+NOTE: These instructions are for installing the Arm GNU Toolchain ourselves.
+Ideally you would use a package manager.
+The reason for the current custom installation is that the version in Ubuntu 18.04's package repos is too old for our code.
+
+Links:
+
+- [Main page](https://developer.arm.com/Tools%20and%20Software/GNU%20Toolchain)
+- [Download Arm GNU Toolchain](https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads)
+
+The downloads are broken into 3 sections based on what OS you're running the compiler on: Windows, Linux, and macOS. Our VM runs Linux so use the Linux downloads.
+
+Then each is broken into subsections for what CPU architecture you're using.
+
+As of writing we are using "AArch32 bare-metal target (arm-none-eabi)" for the Tiva.
+
+For the Ansible playbook:
+
+1. Download the SHA256 hash file, and then ideally download and verify the cryptographic signature of the hash file.
+2. If the files are correct, copy the hash (don't just compute the hash of the downloaded file, use the hash given to you by Arm) and use it in the part of the Ansible playbook that downloads the Arm GNU Toolchain. The `ansible.builtin.get_url` module has a `checksum` parameter that you can use to verify the downloaded file.
+3. Use variable files and/or Ansible's conditionals to specify the correct URL and hash for the file to download on different architectures.
+
+## Ansible
+### Print all Ansible facts
+
+```sh
+ansible localhost -m setup
+```
