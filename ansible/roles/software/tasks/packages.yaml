@@ -10,3 +10,17 @@
       - emacs
       - nano
       - magic-wormhole
+      - rlwrap
+      - pdfgrep
+      - git-annex
+      - git-lfs
+      - trash-cli
+      - shellcheck
+      - valgrind
+      - gdb
+      - lldb
+      - clang
+      - tmux
+      - screen
+      - byobu
+      - tree
