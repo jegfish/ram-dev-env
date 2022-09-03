@@ -234,7 +234,7 @@ Formats:
 
 ## NFS mount issues on Fedora
 <https://developer.fedoraproject.org/tools/vagrant/vagrant-nfs.html>
-# Tips
+# Contributing: Helpful resources for contributing to this code/repository
 ## Arm GNU Toolchain
 
 This is the compiler we use for the Tiva.
