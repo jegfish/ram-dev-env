@@ -179,7 +179,7 @@ Pre-provisioning performs only the operations that can be done ahead-of-time.
 Once you've done the initial setup, run the following:
 
 ```sh
-vm$ ~/.dev-env/ram provision
+vm$ ~/.dev-env/bin/ram provision
 ```
 
 It can take upwards of 15 minutes (mostly depending on network connection).
