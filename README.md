@@ -258,7 +258,7 @@ For the Ansible playbook:
 
 1. Download the SHA256 hash file, and then ideally download and verify the cryptographic signature of the hash file.
 2. If the files are correct, copy the hash (don't just compute the hash of the downloaded file, use the hash given to you by Arm) and use it in the part of the Ansible playbook that downloads the Arm GNU Toolchain. The `ansible.builtin.get_url` module has a `checksum` parameter that you can use to verify the downloaded file.
-3. Use variable files and/or Ansible's conditionals to specify the correct URL and hash for the file to download on different architectures.
+3. Specify the values for the variables in the architecture-specific variable files, e.g. `ansible/roles/software/vars/x86_64.yaml`.
 
 ## Ansible
 ### Documentation
@@ -275,3 +275,4 @@ It has plenty of usage examples along with the listing of all possible arguments
 ```sh
 ansible localhost -m setup
 ```
+

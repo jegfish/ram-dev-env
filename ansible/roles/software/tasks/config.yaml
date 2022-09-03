@@ -1,28 +1,37 @@
-- name: Create directories
-  file:
-    path: '~/qubo/src'
-    state: directory
-
 - name: Insert/Update configuration block in bashrc
   blockinfile:
     path: '~/.bashrc'
     marker: "# {mark} ANSIBLE MANAGED BLOCK"
     block: |
       export PATH="$PATH:$HOME/.dev-env/bin"
+      export PATH="$PATH:$HOME/.local/bin"
       
       export QUBO_PATH=~/qubo
       export GAZEBO_MODEL_PATH="$QUBO_PATH/src/qubo_gazebo/nbrf:$GAZEBO_MODEL_PATH"
       source "$QUBO_PATH/devel/setup.bash"
 
-- name: Initialize and build catkin workspace
-  block:
-    - name: Run `catkin init`
-      shell: source /opt/ros/melodic/setup.bash && catkin init
-      args:
-        executable: /bin/bash
-        chdir: ~/qubo
-    - name: Run `catkin build`
-      shell: source /opt/ros/melodic/setup.bash && catkin build
-      args:
-        executable: /bin/bash
-        chdir: ~/qubo
+- name: Create directories
+  file:
+    path: '~/qubo/src'
+    state: directory
+
+- name: Ensure ssh directory exists
+  file:
+    path: ~/.ssh
+    state: directory
+
+- name: Configure SSH client
+  ansible.builtin.blockinfile:
+    path: ~/.ssh/config
+    create: yes
+    marker: "# {mark} ANSIBLE MANAGED BLOCK"
+    block: |
+      # Share auth between SSH sessions. Don't have to authenticate again if you already have an open session.
+      Host *
+          ControlMaster auto
+          ControlPersist 30
+          ControlPath ~/.ssh/ssh_mux_%h_%p_%r
+          
+      Host gitlab.com
+          HostName gitlab.com
+          IdentityFile {{ ssh_keypair_path }}
