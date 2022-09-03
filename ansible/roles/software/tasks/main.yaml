@@ -1,7 +1,7 @@
 - name: Include ROS
   include_tasks: ros.yaml
-- name: Include embedded software setup
-  include_tasks: embedded.yaml
+- name: Include Tiva software setup
+  include_tasks: tiva.yaml
 - name: Include setup of workspace
   include_tasks: config.yaml
 - name: Include GUI installation and configuration

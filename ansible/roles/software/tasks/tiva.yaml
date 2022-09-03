@@ -1,0 +1,69 @@
+# Include variables that depend on the system architecture (e.g. x86_64 vs arm64).
+- include_vars: "{{ role_path }}/vars/{{ ansible_facts['machine'] }}.yaml"
+
+- name: Add user to necessary groups for accessing serial ports
+  become: yes
+  user:
+    name: "{{ ansible_user_id }}"
+    append: yes
+    groups: dialout
+
+- name: Install R@M embedded packages
+  become: yes
+  apt:
+    update_cache: yes
+    name:
+      - screen
+      - openocd
+      - lm4flash
+      - astyle # code auto-formatter
+
+- name: Install Arm GNU Toolchain
+  block:
+    - name: Ensure build directory exists
+      ansible.builtin.file:
+        path: "{{ role_path }}/build"
+        state: directory
+    - name: Download and verify Arm GNU Toolchain
+      ansible.builtin.get_url:
+        url: "{{ arm_gnu_toolchain_url }}"
+        # Important to specify a destination so we don't download the file again if it's already there.
+        dest: "{{ role_path }}/build/{{ arm_toolchain_archive_name }}"
+        checksum: "{{ arm_gnu_toolchain_checksum }}"
+    - name: Extract Arm GNU Toolchain archive
+      ansible.builtin.unarchive:
+        src: "{{ role_path }}/build/{{ arm_toolchain_archive_name }}"
+        dest: "{{ role_path }}/build/"
+        creates: "{{ role_path }}/build/{{ arm_toolchain_extracted_dirname }}"
+    - name: Ensure '~/.local/' directory exists.
+      ansible.builtin.file:
+        path: ~/.local
+        state: directory
+    - name: Install
+      # TODO Either `/opt/`, maybe `/usr/local/`, or user `~/.local/`
+      # TODO Use arm_toolchain.dest
+      vars:
+        arm_toolchain_extracted_path: "{{ role_path }}/build/{{ arm_toolchain_extracted_dirname }}"
+      block:
+        # The `synchronize` module uses rsync.
+        # It is much faster than the `ansible.builtin.copy` module, especially for copying many files.
+        - name: Copy `bin` files
+          ansible.posix.synchronize:
+            src: "{{ arm_toolchain_extracted_path }}/bin/"
+            dest: ~/.local/bin/
+        - name: Copy `share` files
+          ansible.posix.synchronize:
+            src: "{{ arm_toolchain_extracted_path }}/share/"
+            dest: ~/.local/share/
+        - name: Copy `lib` files
+          ansible.posix.synchronize:
+            src: "{{ arm_toolchain_extracted_path }}/lib/"
+            dest: ~/.local/lib/
+        - name: Copy `libexec` files
+          ansible.posix.synchronize:
+            src: "{{ arm_toolchain_extracted_path }}/libexec/"
+            dest: ~/.local/libexec/
+        - name: Copy `arm-none-eabi` files
+          ansible.posix.synchronize:
+            src: "{{ arm_toolchain_extracted_path }}/arm-none-eabi/"
+            dest: ~/.local/arm-none-eabi/
