@@ -234,7 +234,7 @@ Formats:
 
 ## NFS mount issues on Fedora
 <https://developer.fedoraproject.org/tools/vagrant/vagrant-nfs.html>
-# Tips
+# Contributing: Helpful resources for contributing to this code/repository
 ## Arm GNU Toolchain
 
 This is the compiler we use for the Tiva.
@@ -261,6 +261,15 @@ For the Ansible playbook:
 3. Use variable files and/or Ansible's conditionals to specify the correct URL and hash for the file to download on different architectures.
 
 ## Ansible
+### Documentation
+
+- https://docs.ansible.com/
+
+Usually a web search for "ansible <module/command>" or "ansible <task I want to accomplish>" will tend to find the section of the documentation you want.
+
+If you're trying to use a particular module/command (or your task is accomplished by a module/command) I'd recommend using the official documentation (whether you got there manually or from the web search), as it is quite good.
+It has plenty of usage examples along with the listing of all possible arguments you can pass to modules.
+
 ### Print all Ansible facts
 
 ```sh
