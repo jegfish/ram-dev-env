@@ -182,7 +182,7 @@ Once you've done the initial setup, run the following:
 vm$ ~/.dev-env/bin/ram provision
 ```
 
-It can take upwards of 15 minutes (mostly depending on network connection).
+It can take upwards of 50 minutes (mostly depending on network connection).
 Ideally you should only be asked for the password or other input once, so that you can do something else while it's running.
 As of writing that is the case.
 
