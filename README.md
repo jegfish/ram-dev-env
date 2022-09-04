@@ -176,10 +176,46 @@ If something went wrong:
 
 TODO
 
+# Issues
+
+## `Failed to connect socket to '/var/run/libvirt/virtnetworkd-sock-ro': No such file or directory`
+`systemctl start libvirtd`
+`systemctl start virtnetworkd`
+
+## NFS mount issues on Fedora
+<https://developer.fedoraproject.org/tools/vagrant/vagrant-nfs.html>
+# Contributing: Helpful resources for contributing to this code/repository
 # Creating a base VM image
 
-If you have been given a base image already, this section of the instructions are unnecessary for you.
+If you have been given a base image already, and are just trying to setup the provided Robotics @ Maryland development environment, this section of the instructions are unnecessary for you.
 This section is for members working on improving the development environment automation.
+
+## Creating an image for a different processor architecture
+
+Most members will probably have an x86\_64 computer, but especially with the new Apple silicon Arm Macs and Chromebooks, Arm processors are becoming more common.
+
+qemu-system-aarch64 can emulate an Arm processor, allowing you to make an Arm VM image without using an Arm computer.
+QEMU can also emulate x86\_64 if you're on an Arm processor.
+
+Why not just have the members' computers emulate to run the "regular" base image?
+Because emulation is slow.
+So setting up an emulated base image will probably take longer, but hopefully most of that extra time will not require user-interaction.
+
+### Linux: virt-manager
+
+- Start the creation of a new VM.
+- If the first window in the popup wizard doesn't have an "Architecture options" dropdown:
+  - Check your distributions package manager for a package named something like `qemu-system-aarch64` (or `qemu-system-x86` if you're trying to emulate x86).
+    Install it, then start over. If it still doesn't show up try restarting virt-manager, then if necessary restarting your computer.
+  - Note: `qemu-system-arm` is different and will not work.
+- In the "Architecture options" dropdown select 'aarch64' for the architecture.
+- The rest of the installation process should be the same
+
+Notes:
+
+- Ubuntu only seems to provide an Ubuntu Server installation ISO for Arm (they call it 'arm64') for Ubuntu 18.04.
+  - So you will need to use the TUI Server installer rather than the Desktop graphical installer.
+    The Server installer is not difficult to use but it asks more questions than the Desktop installer.
 
 ## Initial setup
 
@@ -309,15 +345,7 @@ Formats:
 - `vdi` -- "VirtualBox disk image".
 
 `qemu-img convert -f <INPUT_FORMAT> -O <OUTPUT_FORMAT> <INPUT_FILENAME> <OUTPUT_FILENAME>`
-# Issues
 
-## `Failed to connect socket to '/var/run/libvirt/virtnetworkd-sock-ro': No such file or directory`
-`systemctl start libvirtd`
-`systemctl start virtnetworkd`
-
-## NFS mount issues on Fedora
-<https://developer.fedoraproject.org/tools/vagrant/vagrant-nfs.html>
-# Contributing: Helpful resources for contributing to this code/repository
 ## Arm GNU Toolchain
 
 This is the compiler we use for the Tiva.
