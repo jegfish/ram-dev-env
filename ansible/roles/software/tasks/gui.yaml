@@ -5,3 +5,49 @@
   apt:
     name:
       - ubuntu-desktop
+
+# Install Visual Studio Code
+# Based on instructions at: https://code.visualstudio.com/docs/setup/linux#_debian-and-ubuntu-based-distributions
+
+- name: Ensure build directory exists
+  ansible.builtin.file:
+    path: "{{ role_path }}/build"
+    state: directory
+
+- name: Download Microsoft's key
+  ansible.builtin.get_url:
+    url: 'https://packages.microsoft.com/keys/microsoft.asc'
+    dest: "{{ role_path }}/build/microsoft.asc"
+    checksum: sha256:2cfd20a306b2fa5e25522d78f2ef50a1f429d35fd30bd983e2ebffc2b80944fa
+
+- name: Dearmor Microsoft's GPG key
+  ansible.builtin.command:
+    cmd: "gpg --output {{ role_path }}/build/packages.microsoft.gpg --dearmor {{ role_path }}/build/microsoft.asc"
+    creates: "{{ role_path }}/build/packages.microsoft.gpg"
+
+- name: Install Microsoft's GPG key
+  become: yes
+  ansible.builtin.copy:
+    src: "{{ role_path }}/build/packages.microsoft.gpg"
+    dest: /etc/apt/trusted.gpg.d/packages.microsoft.gpg
+    force: yes
+    owner: root
+    group: root
+    mode: u=rw,g=r,o=r
+
+- name: Add Microsoft's apt repo
+  become: yes
+  ansible.builtin.copy:
+    content: 'deb [arch=amd64,arm64,armhf signed-by=/etc/apt/trusted.gpg.d/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main'
+    dest: '/etc/apt/sources.list.d/vscode.list'
+    force: yes
+    owner: root
+    group: root
+    mode: u=rw,g=r,o=r
+
+- name: Install Visual Studio Code
+  become: yes
+  apt:
+    # Necessary to update the cache because added a new apt repository.
+    update_cache: yes
+    name: code
