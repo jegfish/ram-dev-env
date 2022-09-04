@@ -135,7 +135,7 @@ So, to run the above command you would type `echo "hello"` into the terminal, th
 Ways to launch the terminal emulator:
 
 - Ctrl+Alt+t
-- Super (commonly has Windows logo. On Macs the Command key may act as Super) key opens the app launcher, then start typing "terminal" and click on the Terminal icon.
+- The Super key (commonly has Windows logo. On Macs the Command key may act as Super) opens the app launcher, then start typing "terminal" and click on the Terminal icon.
 - Click on the grid of dots in the bottom left corner (bottom of the app dash/dock on the left), then start typing "terminal" and click on the Terminal icon.
 
 ### Run the setup command
