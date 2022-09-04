@@ -8,14 +8,18 @@ die() {
 }
 
 usage() {
+    cmd_name=$(basename "$0")
     cat <<EOF
-usage: $0
+usage: $cmd_name <command>
 
-  $0 setup
+  $cmd_name setup
     Ensures that your Robotics at Maryland development environment is setup.
-  $0 provision
+  $cmd_name update
+    Download the latest Robotics at Maryland development environment configuration.
+
+  $cmd_name provision
     Run the Ansible playbook, skipping tasks tagged with 'postinstall'. Intended to be used when creating a base VM image to distribute to others.
-  $0 clean-image
+  $cmd_name clean-image
     For running after provisioning with the intent of distributing the VM image to others. Removes things such as shell history files.
 EOF
 }
@@ -72,6 +76,9 @@ case "$1" in
         rm -f ~/.sudo_as_admin_successful
         rm -f ~/.cache/motd.legal-displayed
         echo "To clear Bash shell history and quit, run 'history -c && history -w && exit'."
+        ;;
+    update)
+        git --git-dir="$HOME"/.dev-env/.git/ --work-tree="$HOME"/.dev-env/ pull
         ;;
     *)
         usage
