@@ -316,6 +316,7 @@ Log in to the GUI, then if you get a popup:
 - Don't enable LivePatch.
 - Opt-out of telemetry, don't send system information to Canonical.
 - If you get a popup asking about upgrading to a newer version of Ubuntu, select the option that amounts to "no, don't ask me again".
+  - It doesn't show up right away. If you wait 3 minutes it probably will. Don't wait too long, it's not vital.
 - Go through the rest of the popup wizard.
 
 ### Shutdown the VM
