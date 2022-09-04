@@ -143,6 +143,7 @@ Ways to launch the terminal emulator:
 This tends to take around 1-2 minutes to run.
 You will be asked for your password at the start.
 You may not see anything as you type your password, not even filler characters like stars/asterisks.
+
 Partway through it will pause to ask you to add an SSH public key to GitLab.
 Your SSH keypair will authenticate you with GitLab, allowing you to contribute to the Robotics @ Maryland code repositories.
 It will generate the key for you, you just need to follow the instructions (which will be printed to your terminal) to add it to GitLab.
