@@ -205,7 +205,7 @@ So setting up an emulated base image will probably take longer, but hopefully mo
 
 - Start the creation of a new VM.
 - If the first window in the popup wizard doesn't have an "Architecture options" dropdown:
-  - Check your distributions package manager for a package named something like `qemu-system-aarch64` (or `qemu-system-x86` if you're trying to emulate x86).
+  - Check your Linux distribution's package manager for a package named something like `qemu-system-aarch64` (or `qemu-system-x86` if you're trying to emulate x86).
     Install it, then start over. If it still doesn't show up try restarting virt-manager, then if necessary restarting your computer.
   - Note: `qemu-system-arm` is different and will not work.
 - In the "Architecture options" dropdown select 'aarch64' for the architecture.
