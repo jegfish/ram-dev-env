@@ -97,20 +97,83 @@ If you are willing, please contribute instructions for additional VM software.
 
 ## 2: Log in to the virtual machine
 
+The username is "ram".
 The default password is "password".
 The thinking is that access to your VM is protected by your computer's password and lockscreen.
+If you wish to change the password you may, but then if you rerun the "ram setup" it may error out because it assumes the default password.
+We'll fix this issue when we encounter it.
 
-## 4: Run the setup script in the virtual machine
+## 3: Run the setup script
 
+### Background information
+
+For the sake of clarity, commands you need to run will be in code blocks.
+Here is an example code block:
+
+```sh
+vm:~/example/directory/path$ echo "hello"
+```
+
+Here '`vm:~$ `' is the prompt.
+You should see a prompt in your terminal, though it may be different, probably something like `ram@ubuntu:~$`.
+You don't type the prompt, it's just there to let you know the shell is ready to receive a command from you.
+This document will use prompts to make it clear where you should run the command.
+For example, the prompt labeled 'vm' should be run in your **v**irtual **m**achine.
+
+The section of the prompt between the colon and the dollar sign is your working directory (also called "current working directory" or "current directory").
+Directories are also known as "folders".
+The `~` ("tilde") is an abbreviation for your "home" directory, the place where you can store your files.
+You will usually start out in your home directory.
+
+The commands in this document will be short and you may be using them often, so it could be a good idea to type them out.
+If you decide to use copy and paste, be take care to not copy the prompt.
+
+So, to run the above command you would type `echo "hello"` into the terminal, then press enter/return to run the command.
+
+### Launch the terminal emulator
+
+Ways to launch the terminal emulator:
+
+- Ctrl+Alt+t
+- Super (commonly has Windows logo. On Macs the Command key may act as Super) key opens the app launcher, then start typing "terminal" and click on the Terminal icon.
+- Click on the grid of dots in the bottom left corner (bottom of the app dash/dock on the left), then start typing "terminal" and click on the Terminal icon.
+
+### Run the setup command
+
+This tends to take around 1-2 minutes to run.
 You will be asked for your password at the start.
+You may not see anything as you type your password, not even filler characters like stars/asterisks.
+Partway through it will pause to ask you to add an SSH public key to GitLab.
+Your SSH keypair will authenticate you with GitLab, allowing you to contribute to the Robotics @ Maryland code repositories.
+It will generate the key for you, you just need to follow the instructions (which will be printed to your terminal) to add it to GitLab.
 
-## 4.*: Upload SSH key to GitLab
+```sh
+vm:~$ ram setup
+```
 
-- TODO The setup script and/or Ansible playbook will pause running after
-  generating an SSH key, asking the user to upload the key to GitLab.
-  - TODO When trying to clone code repos, if authentication error again ask user
-    to upload the key
-  - TODO ? Copy to clipboard? Print to terminal to have user select and copy?
+## 4: Verify that the setup worked
+
+### Run catkin build
+
+```sh
+vm:~$ cd ~/qubo
+vm:~/qubo$ catkin build; echo "status: $?"
+```
+
+If everything went well, Catkin won't have complained, and you should see "status: 0" at the end of the output.
+If you see a number other than zero for the status, something has gone wrong.
+
+If something went wrong:
+
+- Check that you typed the command correctly
+- Make sure that you are in the `~/qubo` directory.
+  - Your prompt should tell you what directory you're in.
+  - The command `pwd` will tell you your working directory.
+- If you can't figure out what went wrong or how to fix it, ask around or ask a lead for help.
+
+### Run the simulation of Qubo
+
+TODO
 
 # Creating a base VM image
 
@@ -145,6 +208,10 @@ Do not use a special Ubuntu flavor (in order to do so you would have to change t
 The default Ubuntu desktop environment will be installed by the Ansible playbook regardless.
 
 Name the user you create during the installation "ram", and give it the default password of "password". Make sure it has permission to `sudo` to escalate to root privileges.
+
+From here on you may work over the TTY, SSH, or the GUI, whichever you prefer.
+
+If you choose to work with the GUI, read "[Clearing first-time GUI popups](#clearing-first-time-gui-popups)" first as you will encounter it right away.
 
 ### Clone Git repo
 
