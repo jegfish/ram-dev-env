@@ -268,6 +268,7 @@ If you have SSH access to the VM and the `scp` command on your host OS, this wil
 Replace `<VM-IP-ADDRESS>` with the IP address or hostname of your VM.
 
 ```sh
+host$ # NOTE: If you Git cloned from GitLab, don't do any of this.
 host$ scp -r dev-env ram@<VM-IP-ADDRESS>:.dev-env
 host$ # If your current directory is this repo, then try:
 host$ scp -r . ram@<VM-IP-ADDRESS>:.dev-env
@@ -283,12 +284,17 @@ Pre-provisioning performs only the operations that can be done ahead-of-time.
 Once you've done the initial setup, run the following:
 
 ```sh
+vm$ sudo apt update && sudo apt upgrade -y
 vm$ ~/.dev-env/bin/ram provision
+vm$ # Or, all at once:
+vm$ sudo apt update && sudo apt upgrade -y && ~/.dev-env/bin/ram provision
 ```
 
 It can take upwards of 50 minutes (mostly depending on network connection).
 Ideally you should only be asked for the password or other input once, so that you can do something else while it's running.
-As of writing that is the case.
+`ram provision` only asks for input once at the start.
+However, if you run the commands all-at-once the `sudo` password cache may time out, so you may have to type your password twice: once for `apt update` and `apt upgrade`, then once for the beginning of `ram provision`.
+In practice this has not happened and it is suggested that you run them all at once so that you can do something else while it's running.
 
 ## Cleaning base image
 
