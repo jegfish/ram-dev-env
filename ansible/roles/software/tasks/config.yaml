@@ -35,3 +35,16 @@
       Host gitlab.com
           HostName gitlab.com
           IdentityFile {{ ssh_keypair_path }}
+
+# Primarily an Ubuntu 18.04 issue. May be fixed in later versions of Ubuntu.
+# So test without this on an upgrade, as we'd rather avoid messing with the default configuration.
+- name: Configure network interface
+  become: yes
+  ansible.builtin.copy:
+    src: "{{ role_path }}/files/01-netcfg.yaml"
+    dest: /etc/netplan/01-netcfg.yaml
+    force: yes
+    owner: root
+    group: root
+    mode: u=rw,g=r,o=r
+  notify: Apply netplan configuration
