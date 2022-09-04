@@ -170,7 +170,7 @@ If something went wrong:
 - Make sure that you are in the `~/qubo` directory.
   - Your prompt should tell you what directory you're in.
   - The command `pwd` will tell you your working directory.
-- If you can't figure out what went wrong or how to fix it, ask around or ask a lead for help.
+- If you can't figure out what went wrong or how to fix it, that's okay! We don't expect you to know this stuff right away. Ask around or ask a lead for help.
 
 ### Run the simulation of Qubo
 
