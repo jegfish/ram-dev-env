@@ -188,6 +188,8 @@ As of writing that is the case.
 
 ## Cleaning base image
 
+### Some automatic cleaning
+
 When the image is ready for distributing to others, you should clean it.
 This will make the image more like a first boot by removing some files that are touched during the setup process.
 
@@ -195,7 +197,20 @@ This will make the image more like a first boot by removing some files that are 
 vm$ ~/.dev-env/bin/ram clean-image
 ```
 
-Follow any instructions it gives you, then shutdown the VM.
+Follow any instructions it gives you.
+
+### Clearing first-time GUI popups
+
+Log in to the GUI, then if you get a popup:
+
+- Don't enable LivePatch.
+- Opt-out of telemetry, don't send system information to Canonical.
+- If you get a popup asking about upgrading to a newer version of Ubuntu, select the option that amounts to "no, don't ask me again".
+- Go through the rest of the popup wizard.
+
+### Shutdown the VM
+
+Once you are done setting up the base image, shut down the VM.
 
 ## Shrinking the base image
 
