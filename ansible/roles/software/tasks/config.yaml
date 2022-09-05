@@ -1,7 +1,7 @@
-- name: Insert/Update configuration block in bashrc
 - name: Configure Bash
   blockinfile:
     path: '~/.bashrc'
+    create: yes
     marker: "# {mark} ANSIBLE MANAGED BLOCK"
     block: |
       export PATH="$PATH:$HOME/.dev-env/bin"
