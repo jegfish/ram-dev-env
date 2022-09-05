@@ -15,6 +15,7 @@
       - git-annex
       - git-lfs
       - trash-cli
+      - extundelete
       - shellcheck
       - valgrind
       - gdb
