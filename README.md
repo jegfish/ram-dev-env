@@ -1,5 +1,57 @@
 # Table of Contents
 
+<!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-refresh-toc -->
+
+
+- [Table of Contents](#table-of-contents)
+- [Development Environment Setup Instructions](#development-environment-setup-instructions)
+    - [1. Setup virtual machine software](#1-setup-virtual-machine-software)
+        - [VMWare](#vmware)
+            - [Installing](#installing)
+            - [Creating the VM](#creating-the-vm)
+        - [VirtualBox](#virtualbox)
+            - [Installing](#installing-1)
+            - [Creating the VM](#creating-the-vm-1)
+        - [virt-manager](#virt-manager)
+            - [Installing](#installing-2)
+            - [Creating the VM](#creating-the-vm-2)
+        - [UTM](#utm)
+            - [Installing](#installing-3)
+            - [Creating the VM](#creating-the-vm-3)
+    - [2. Log in to the virtual machine](#2-log-in-to-the-virtual-machine)
+    - [3. Run the setup script](#3-run-the-setup-script)
+        - [Background information](#background-information)
+        - [Launch the terminal emulator](#launch-the-terminal-emulator)
+        - [Run the setup command](#run-the-setup-command)
+    - [4. Verify that the setup worked](#4-verify-that-the-setup-worked)
+        - [Run catkin build](#run-catkin-build)
+        - [Run the simulation of Qubo](#run-the-simulation-of-qubo)
+- [Issues](#issues)
+    - [`Failed to connect socket to '/var/run/libvirt/virtnetworkd-sock-ro': No such file or directory`](#failed-to-connect-socket-to-varrunlibvirtvirtnetworkd-sock-ro-no-such-file-or-directory)
+    - [NFS mount issues on Fedora](#nfs-mount-issues-on-fedora)
+- [Contributing: Helpful resources for contributing to this code/repository](#contributing-helpful-resources-for-contributing-to-this-coderepository)
+- [Creating a base VM image](#creating-a-base-vm-image)
+    - [Creating an image for a different processor architecture](#creating-an-image-for-a-different-processor-architecture)
+        - [Linux: virt-manager](#linux-virt-manager)
+    - [Initial setup](#initial-setup)
+        - [OS Installation](#os-installation)
+        - [Clone Git repo](#clone-git-repo)
+    - [Pre-provisioning](#pre-provisioning)
+    - [Cleaning base image](#cleaning-base-image)
+        - [Some automatic cleaning](#some-automatic-cleaning)
+        - [Clearing first-time GUI popups](#clearing-first-time-gui-popups)
+        - [Shutdown the VM](#shutdown-the-vm)
+    - [Shrinking the base image](#shrinking-the-base-image)
+        - [Eliminating empty sectors](#eliminating-empty-sectors)
+        - [Compress](#compress)
+    - [Converting to other image formats](#converting-to-other-image-formats)
+    - [Arm GNU Toolchain](#arm-gnu-toolchain)
+    - [Ansible](#ansible)
+        - [Documentation](#documentation)
+        - [Print all Ansible facts](#print-all-ansible-facts)
+
+<!-- markdown-toc end -->
+
 # Development Environment Setup Instructions
 
 Follow these instructions to setup a [virtual machine](https://simple.wikipedia.org/wiki/Virtual_machine) (VM)
@@ -9,7 +61,7 @@ NOTE: The configuration automation in this repository is meant for running on a 
 There is currently no automated *un*install process, and few customization options.
 If you wish to set this up on a regular non-VM Ubuntu Linux install, do so at your own risk.
 
-## 1: Setup virtual machine software
+## 1. Setup virtual machine software
 
 Take your pick of VM software.
 
@@ -95,7 +147,7 @@ If you are willing, please contribute instructions for additional VM software.
 
 **TODO**
 
-## 2: Log in to the virtual machine
+## 2. Log in to the virtual machine
 
 The username is "ram".
 The default password is "password".
@@ -103,7 +155,7 @@ The thinking is that access to your VM is protected by your computer's password 
 If you wish to change the password you may, but then if you rerun the "ram setup" it may error out because it assumes the default password.
 We'll fix this issue when we encounter it.
 
-## 3: Run the setup script
+## 3. Run the setup script
 
 ### Background information
 
@@ -152,7 +204,7 @@ It will generate the key for you, you just need to follow the instructions (whic
 vm:~$ ram setup
 ```
 
-## 4: Verify that the setup worked
+## 4. Verify that the setup worked
 
 ### Run catkin build
 
@@ -185,12 +237,12 @@ TODO
 ## NFS mount issues on Fedora
 <https://developer.fedoraproject.org/tools/vagrant/vagrant-nfs.html>
 # Contributing: Helpful resources for contributing to this code/repository
-# Creating a base VM image
+## Creating a base VM image
 
 If you have been given a base image already, and are just trying to setup the provided Robotics @ Maryland development environment, this section of the instructions are unnecessary for you.
 This section is for members working on improving the development environment automation.
 
-## Creating an image for a different processor architecture
+### Creating an image for a different processor architecture
 
 Most members will probably have an x86\_64 computer, but especially with the new Apple silicon Arm Macs and Chromebooks, Arm processors are becoming more common.
 
@@ -201,7 +253,7 @@ Why not just have the members' computers emulate to run the "regular" base image
 Because emulation is slow.
 So setting up an emulated base image will probably take longer, but hopefully most of that extra time will not require user-interaction.
 
-### Linux: virt-manager
+#### Linux: virt-manager
 
 - Start the creation of a new VM.
 - If the first window in the popup wizard doesn't have an "Architecture options" dropdown:
@@ -217,7 +269,7 @@ Notes:
   - So you will need to use the TUI Server installer rather than the Desktop graphical installer.
     The Server installer is not difficult to use but it asks more questions than the Desktop installer.
 
-## Initial setup
+### Initial setup
 
 In the code blocks that tell you what commands to run, the prompt (not part of the command, don't type it) is `<location>$ `.
 `<location>` tells you where to run the command.
@@ -234,7 +286,7 @@ You don't need to type lines/commands that start with `#`.
 Because this is a more involved process than setting up your personal development environment when someone has provided you the base image, the commands are not written to be copied.
 Many of them will be acceptable to copy, but some are written assuming you will be able to make the minor adjustment required if it fails due to differences on your computer than what is assumed in this document.
 
-### OS Installation
+#### OS Installation
 
 Currently we are using Ubuntu 18.04 LTS, and the configuration automation is targeted to that.
 If you want to use a newer version of Ubuntu or a different operating system, the Ansible playbook needs to be updated or extended to support that operating system.
@@ -250,7 +302,7 @@ From here on you may work over the TTY, SSH, or the GUI, whichever you prefer.
 
 If you choose to work with the GUI, read "[Clearing first-time GUI popups](#clearing-first-time-gui-popups)" first as you will encounter it right away.
 
-### Clone Git repo
+#### Clone Git repo
 
 Clone this Git repository to the VM, to the directory `~/.dev-env/`.
 
@@ -275,7 +327,7 @@ host$ scp -r . ram@<VM-IP-ADDRESS>:.dev-env
 vm$ rm -rf ~/.dev-env/.git
 ```
 
-## Pre-provisioning
+### Pre-provisioning
 
 Some parts of the setup take a long time, but can be done ahead-of-time.
 For example, upgrading and installing packages.
@@ -296,9 +348,9 @@ Ideally you should only be asked for the password or other input once, so that y
 However, if you run the commands all-at-once the `sudo` password cache may time out, so you may have to type your password twice: once for `apt update` and `apt upgrade`, then once for the beginning of `ram provision`.
 In practice this has not happened and it is suggested that you run them all at once so that you can do something else while it's running.
 
-## Cleaning base image
+### Cleaning base image
 
-### Some automatic cleaning
+#### Some automatic cleaning
 
 When the image is ready for distributing to others, you should clean it.
 This will make the image more like a first boot by removing some files that are touched during the setup process.
@@ -309,7 +361,7 @@ vm$ ~/.dev-env/bin/ram clean-image
 
 Follow any instructions it gives you.
 
-### Clearing first-time GUI popups
+#### Clearing first-time GUI popups
 
 Log in to the GUI, then if you get a popup:
 
@@ -319,13 +371,13 @@ Log in to the GUI, then if you get a popup:
   - It doesn't show up right away. If you wait 3 minutes it probably will. Don't wait too long, it's not vital.
 - Go through the rest of the popup wizard.
 
-### Shutdown the VM
+#### Shutdown the VM
 
 Once you are done setting up the base image, shut down the VM.
 
-## Shrinking the base image
+### Shrinking the base image
 
-### Eliminating empty sectors
+#### Eliminating empty sectors
 
 You can eliminate the empty sectors in a qcow2 file with `qemu-img convert`.
 
@@ -335,7 +387,7 @@ host$ # Replace old version with the smaller sparse image.
 host$ mv <OUTPUT-IMAGE> <INPUT-IMAGE>
 ```
 
-### Compress
+#### Compress
 
 Not all VM software supports compressed images well, so we will just use a compressed transport format that is then decompressed on the user's computer.
 
@@ -343,7 +395,7 @@ Create a Zip file, 7zip file, compressed tarfile, etc.
 Zip files can be easily decompressed on MacOS and MS Windows without installing additional software (and most Linux distributions), so they are generally a good format.
 You may want to set the compression to the highest level to get the minimum file size; on the command-line utility from Info-ZIP you can use the `-9` option to do this.
 
-## Converting to other image formats
+### Converting to other image formats
 
 Formats:
 
@@ -352,6 +404,16 @@ Formats:
 - `vdi` -- "VirtualBox disk image".
 
 `qemu-img convert -f <INPUT_FORMAT> -O <OUTPUT_FORMAT> <INPUT_FILENAME> <OUTPUT_FILENAME>`
+
+## README table of contents
+
+The table of contents at the top of this README was automatically generated with the Emacs package [markdown-toc](https://github.com/ardumont/markdown-toc).
+
+The following Emacs Lisp configuration was used:
+
+```lisp
+(setq markdown-toc-header-toc-title "")
+```
 
 ## Arm GNU Toolchain
 
