@@ -1,11 +1,12 @@
 - name: Insert/Update configuration block in bashrc
+- name: Configure Bash
   blockinfile:
     path: '~/.bashrc'
     marker: "# {mark} ANSIBLE MANAGED BLOCK"
     block: |
       export PATH="$PATH:$HOME/.dev-env/bin"
       export PATH="$PATH:$HOME/.local/bin"
-      
+
       export QUBO_PATH=~/qubo
       export GAZEBO_MODEL_PATH="$QUBO_PATH/src/qubo_gazebo/nbrf:$GAZEBO_MODEL_PATH"
       source "/opt/ros/melodic/setup.bash"
@@ -31,7 +32,7 @@
           ControlMaster auto
           ControlPersist 30
           ControlPath ~/.ssh/ssh_mux_%h_%p_%r
-          
+
       Host gitlab.com
           HostName gitlab.com
           IdentityFile {{ ssh_keypair_path }}
