@@ -1,0 +1,7 @@
+arm_gnu_toolchain_url: 'https://developer.arm.com/-/media/Files/downloads/gnu/11.3.rel1/binrel/arm-gnu-toolchain-11.3.rel1-aarch64-arm-none-eabi.tar.xz?rev=82c9a3730e454ab6b8101952cd700cda&hash=9827748B56CB4E80301BB0937274C2814C22D57F'
+arm_gnu_toolchain_checksum: sha256:6c713c11d018dcecc16161f822517484a13af151480bbb722badd732412eb55e
+arm_toolchain_archive_name: 'arm-gnu-toolchain-aarch64.tar.xz'
+# The dirname is whatever directory is contained in the tarfile.
+# Contains version number, so will change if you update to a new version.
+# Could change in other ways so just copy the name after extracting the current version.
+arm_toolchain_extracted_dirname: 'arm-gnu-toolchain-11.3.rel1-aarch64-arm-none-eabi'
