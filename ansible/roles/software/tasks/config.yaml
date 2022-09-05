@@ -30,7 +30,7 @@
       # Share auth between SSH sessions. Don't have to authenticate again if you already have an open session.
       Host *
           ControlMaster auto
-          ControlPersist 30
+          ControlPersist 1
           ControlPath ~/.ssh/ssh_mux_%h_%p_%r
 
       Host gitlab.com
