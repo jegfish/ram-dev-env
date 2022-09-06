@@ -120,6 +120,8 @@ If you are willing, please contribute instructions for additional VM software.
 
 **TODO**
 
+Jump to [next step](#2-log-in-to-the-virtual-machine).
+
 ### VirtualBox
 
 #### Installing
@@ -129,6 +131,8 @@ If you are willing, please contribute instructions for additional VM software.
 #### Creating the VM
 
 **TODO**
+
+Jump to [next step](#2-log-in-to-the-virtual-machine).
 
 ### virt-manager
 
@@ -140,6 +144,8 @@ If you are willing, please contribute instructions for additional VM software.
 
 **TODO**
 
+Jump to [next step](#2-log-in-to-the-virtual-machine).
+
 ### UTM
 
 #### Installing
@@ -149,6 +155,8 @@ If you are willing, please contribute instructions for additional VM software.
 #### Creating the VM
 
 **TODO**
+
+Jump to [next step](#2-log-in-to-the-virtual-machine).
 
 ## 2. Log in to the virtual machine
 
