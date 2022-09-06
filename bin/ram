@@ -14,11 +14,11 @@ usage: $cmd_name <command>
 
   $cmd_name setup
     Ensures that your Robotics at Maryland development environment is setup.
-  $cmd_name update
-    Download the latest Robotics at Maryland development environment configuration.
+    Can be run multiple times, and will update your environment if new configuration changes have been added to the Git repository.
 
   $cmd_name provision
     Run the Ansible playbook, skipping tasks tagged with 'postinstall'. Intended to be used when creating a base VM image to distribute to others.
+    Note: Does not download the latest configuration.
   $cmd_name clean-image
     For running after provisioning with the intent of distributing the VM image to others. Removes things such as shell history files.
 EOF
@@ -42,6 +42,14 @@ ensure_ansible() {
 check_os() {
     [ "$(lsb_release --short --id)" = 'Ubuntu' ] || die "This script performs installation. It is only intended to be run on Ubuntu."
     [ "$(lsb_release --short --codename)" = 'bionic' ] || die "This script performs instllation. It is only intended to be run on Ubuntu, specifically 18.04 LTS Bionic Beaver."
+}
+
+# Downlaod the latest dev-env configuration.
+# Do this at the start of 'ram setup' and 'ram provision' so people always have the latest configuration with fixes and additions.
+# Updating is important so that we don't have to create new base images too frequently.
+ram_update() {
+    echo "Downloading latest dev-env configuration."
+    git --git-dir="$HOME"/.dev-env/.git/ --work-tree="$HOME"/.dev-env/ pull
 }
 
 # Some sanity checks.
@@ -68,6 +76,7 @@ case "$1" in
         ;;
     setup)
         ensure_ansible
+        ram_update
         ~/.local/bin/ansible-playbook --inventory "${ansible_root}/hosts" "${ansible_root}/playbook.yaml" --extra-vars='ansible_become_pass=password'
         ;;
     clean-image)
@@ -76,9 +85,6 @@ case "$1" in
         rm -f ~/.sudo_as_admin_successful
         rm -f ~/.cache/motd.legal-displayed
         echo "To clear Bash shell history and quit, run 'history -c && history -w && exit'."
-        ;;
-    update)
-        git --git-dir="$HOME"/.dev-env/.git/ --work-tree="$HOME"/.dev-env/ pull
         ;;
     *)
         usage
