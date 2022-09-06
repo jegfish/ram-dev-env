@@ -316,30 +316,14 @@ Clone this Git repository to the VM, to the directory `~/.dev-env/`.
 vm$ git clone https://gitlab.com/robotics-at-maryland/dev-env.git ~/.dev-env
 ```
 
-If it is easier, you may copy the files from your machine to the VM.
-If you do so, it may be a good idea to use a clean clone.
-This is because the `.git/` directory in your clone may contain information specific to your clone, which can be somewhat sensitive, e.g. your name or email address.
-Either clone from the GitLab, or do a local clone and make sure your clean clone's "origin" remote points to the GitLab rather than the local directory you cloned from.
-It is likely you will want to give your clean clone a different name than "dev-env" to avoid a conflict; in that case you will will need to modify the following commands appropriately.
-
-If you have SSH access to the VM and the `scp` command on your host OS, this will copy the files over.
-Replace `<VM-IP-ADDRESS>` with the IP address or hostname of your VM.
-
-```sh
-host$ # NOTE: If you Git cloned from GitLab, don't do any of this.
-host$ scp -r dev-env ram@<VM-IP-ADDRESS>:.dev-env
-host$ # If your current directory is this repo, then try:
-host$ scp -r . ram@<VM-IP-ADDRESS>:.dev-env
-vm$ rm -rf ~/.dev-env/.git
-```
-
 ### Pre-provisioning
 
 Some parts of the setup take a long time, but can be done ahead-of-time.
 For example, upgrading and installing packages.
 Pre-provisioning performs only the operations that can be done ahead-of-time.
 
-Once you've done the initial setup, run the following:
+Note: Unlike `ram setup`, `ram provision` does not automatically update to the latest version of the remote Git repository's 'master' branch.
+If you have made changes to the remote since cloning, do a `git pull` first.
 
 ```sh
 vm$ sudo apt update && sudo apt upgrade -y
