@@ -407,6 +407,19 @@ Formats:
 
 `qemu-img convert -f <INPUT_FORMAT> -O <OUTPUT_FORMAT> <INPUT_FILENAME> <OUTPUT_FILENAME>`
 
+## Suggestions
+
+### Work on feature branches, keep the main 'master' branch working
+
+The automation automatically downloads the latest version of itself from the 'master' branch.
+So if you were to push broken code to master, it could break the environment of anyone who runs `ram setup` before a fix is pushed.
+
+When you are making changes to the code, especially non-trivial changes, test it before you push to master.
+If the changes are small and you finish them in a single session this can be done all on your computer, then pushing to master once you've tested.
+Though it is still suggested to make a feature branch on your PC to make it more difficult to accidentally push broken code to master.
+
+If you're working on a feature for a longer period of time, with other people, than push your feature branch to the remote for the sake of collaboration and backups.
+
 ## README table of contents
 
 The table of contents at the top of this README was automatically generated with the Emacs package [markdown-toc](https://github.com/ardumont/markdown-toc).
