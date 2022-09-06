@@ -191,10 +191,10 @@ Ways to launch the terminal emulator:
 - The Super key (commonly has Windows logo. On Macs the Command key may act as Super) opens the app launcher, then start typing "terminal" and click on the Terminal icon.
 - Click on the grid of dots in the bottom left corner (bottom of the app dash/dock on the left), then start typing "terminal" and click on the Terminal icon.
 
-### Run the setup command
+### Run the setup commands
 
 This tends to take around 1-2 minutes to run.
-You will be asked for your password at the start.
+You will be asked for your password (it's "password"), potentially multiple times.
 You may not see anything as you type your password, not even filler characters like stars/asterisks.
 
 Partway through it will pause to ask you to add an SSH public key to GitLab.
@@ -202,6 +202,7 @@ Your SSH keypair will authenticate you with GitLab, allowing you to contribute t
 It will generate the key for you, you just need to follow the instructions (which will be printed to your terminal) to add it to GitLab.
 
 ```sh
+vm:~$ sudo apt update && sudo apt upgrade -y
 vm:~$ ram setup
 ```
 
