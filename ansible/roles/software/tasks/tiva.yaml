@@ -30,40 +30,24 @@
         # Important to specify a destination so we don't download the file again if it's already there.
         dest: "{{ role_path }}/build/{{ arm_toolchain_archive_name }}"
         checksum: "{{ arm_gnu_toolchain_checksum }}"
-    - name: Extract Arm GNU Toolchain archive
-      ansible.builtin.unarchive:
-        src: "{{ role_path }}/build/{{ arm_toolchain_archive_name }}"
-        dest: "{{ role_path }}/build/"
-        creates: "{{ role_path }}/build/{{ arm_toolchain_extracted_dirname }}"
     - name: Ensure '~/.local/' directory exists.
       ansible.builtin.file:
         path: ~/.local
         state: directory
-    - name: Install
-      # TODO Either `/opt/`, maybe `/usr/local/`, or user `~/.local/`
-      # TODO Use arm_toolchain.dest
-      vars:
-        arm_toolchain_extracted_path: "{{ role_path }}/build/{{ arm_toolchain_extracted_dirname }}"
-      block:
-        # The `synchronize` module uses rsync.
-        # It is much faster than the `ansible.builtin.copy` module, especially for copying many files.
-        - name: Copy `bin` files
-          ansible.posix.synchronize:
-            src: "{{ arm_toolchain_extracted_path }}/bin/"
-            dest: ~/.local/bin/
-        - name: Copy `share` files
-          ansible.posix.synchronize:
-            src: "{{ arm_toolchain_extracted_path }}/share/"
-            dest: ~/.local/share/
-        - name: Copy `lib` files
-          ansible.posix.synchronize:
-            src: "{{ arm_toolchain_extracted_path }}/lib/"
-            dest: ~/.local/lib/
-        - name: Copy `libexec` files
-          ansible.posix.synchronize:
-            src: "{{ arm_toolchain_extracted_path }}/libexec/"
-            dest: ~/.local/libexec/
-        - name: Copy `arm-none-eabi` files
-          ansible.posix.synchronize:
-            src: "{{ arm_toolchain_extracted_path }}/arm-none-eabi/"
-            dest: ~/.local/arm-none-eabi/
+    # Extract directly to our desired destination directory.
+    # The files are pretty big so we don't want to just copy them.
+    # The directory structure matches, so this is fine.
+    # The only problem is that the archive puts everything under a single directory, which is generally a good thing.
+    # So, we have to use GNU tar's transform option to turn this into a tarbomb.
+    # There might be a cleaner way to do this while maintaining Ansible's idempotency and avoiding unnecessary copies of large files.
+    # Perhaps a `cp -al` to hardlink to the desired location, or symlinks if they work.
+    #
+    # If you plan on "fixing" this, it's probably better to just use a package manager.
+    # Either update the Ubuntu version (requires updating ROS version, rewriting a lot of code), or use a separate package manager such as Nix or Homebrew.
+    - name: Extract Arm GNU Toolchain archive
+      ansible.builtin.unarchive:
+        src: "{{ role_path }}/build/{{ arm_toolchain_archive_name }}"
+        dest: ~/.local/
+        extra_opts:
+          - --transform
+          - "s/^{{ arm_toolchain_extracted_dirname }}//"
