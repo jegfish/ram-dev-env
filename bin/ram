@@ -14,7 +14,7 @@ usage: $cmd_name <command>
 
   $cmd_name setup
     Ensures that your Robotics at Maryland development environment is setup.
-    Can be run multiple times, and will update your environment if new configuration changes have been added to the Git repository.
+    Can be run multiple times, and will update your environment if new configuration changes have been pushed to the remote Git repository.
 
   $cmd_name provision
     Run the Ansible playbook, skipping tasks tagged with 'postinstall'. Intended to be used when creating a base VM image to distribute to others.
