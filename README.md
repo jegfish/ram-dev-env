@@ -28,6 +28,7 @@
         - [Run the simulation of Qubo](#run-the-simulation-of-qubo)
 - [Issues](#issues)
     - [`Failed to connect socket to '/var/run/libvirt/virtnetworkd-sock-ro': No such file or directory`](#failed-to-connect-socket-to-varrunlibvirtvirtnetworkd-sock-ro-no-such-file-or-directory)
+    - [Gazebo simulation black screen on Apple silicon Mac](#gazebo-simulation-black-screen-on-apple-silicon-mac)
     - [NFS mount issues on Fedora](#nfs-mount-issues-on-fedora)
 - [Contributing: Helpful resources for contributing to this code/repository](#contributing-helpful-resources-for-contributing-to-this-coderepository)
     - [Creating a base VM image](#creating-a-base-vm-image)
@@ -66,40 +67,27 @@ If you wish to set this up on a regular non-VM Ubuntu Linux install, do so at yo
 
 ## 1. Setup virtual machine software
 
-Take your pick of VM software.
+If you already have a preferred VM software, just use that.
+It will be quicker for you to use what you're used to.
 
-First, we'll note special circumstances that will restrict your options:
+If not, we will just provide instructions for a few options, and suggest which you should choose.
 
-- If you are using an Apple Mac computer with an Apple silicon ARM chip, there are fewer available options:
-  - UTM. Open source software and no monetary cost.
-  - VMWare Fusion supports M1 Macs now. Free for UMD students.
-  - Parallels is paid software, with a student discount.
+Suggestions:
 
-Now, we will list some pros and cons:
+- If you are using Windows or an Intel Mac:
+  - Use VirtualBox.
+  - VMWare is also a good choice, but is a bit annoying to install because it requires going through TerpWare to get a student license from UMD.
+- If you are using Linux:
+  - Use virt-manager. You can also use another frontend (like GNOME Boxes) for the underlying QEMU/Libvirt/KVM technologies, but we have tested virt-manager and can help with it.
+  - VirtualBox and VMWare also support Linux. However,
+    - We've found some things worked automatically in virt-manager while requiring difficult configuration in VirtualBox.
+- If you are using an Arm Apple silicon Mac (M1, M2):
+  - Use UTM.
+  - VMWare also supports Arm Macs now, but we have not tested it (we do not have access to an Apple silicon Mac).
 
-- VMWare
-  - pro: UMD provides free access to VMWare Workstation (for Windows and Linux) and VMWare Fusion (for Macs) for students
-  - Runs on Windows, Linux, and Mac OS X (Intel and ARM)
-- VirtualBox
-  - pro: Free.
-  - Runs on Linux, Windows, and Mac OS X (Intel)
-- QEMU
-  - QEMU is just the underlying technology, there are various frontends for controlling it.
-    We will just provide instructions for using the virt-manager GUI frontend.
-  - Mainly useful on Linux, though does run on other OSes.
-- UTM
-  - pro: Free.
-  - Runs on Mac OS X (Intel and ARM)
-- Parallels
-  - pro: Supposedly very easy to use.
-  - con: Paid. $100 one-time for one type of license that looks suitable. Subscription $100/year for extra features, with student discount to $50/year.
-  - Runs on Mac OS X (Intel and ARM)
+If you are willing, please contribute instructions for additional VM software.
 
 Jump to the instructions for your VM software:
-
-If there are no instructions for your desired VM software, you can probably still use it, and we will try our best to help you.
-However if you are not familiar with VM software, it would probably be best that you use one that we list so that we can more easily help you if you run into problems.
-If you are willing, please contribute instructions for additional VM software.
 
 - [VMWare](#vmware)
 - [VirtualBox](#virtualbox)
@@ -245,6 +233,12 @@ TODO
 ## `Failed to connect socket to '/var/run/libvirt/virtnetworkd-sock-ro': No such file or directory`
 `systemctl start libvirtd`
 `systemctl start virtnetworkd`
+
+## Gazebo simulation black screen on Apple silicon Mac
+
+We have not tested it yet, but there seems to be a solution in this Reddit thread: https://www.reddit.com/r/ROS/comments/qhk6s3/gazebo_m1_virtual_machine/
+
+"Now he is using UTM as virtual machine with ubuntu server. You need to change a setting of gpu in the menu display-> from default to vitro-ramfb."
 
 ## NFS mount issues on Fedora
 <https://developer.fedoraproject.org/tools/vagrant/vagrant-nfs.html>
