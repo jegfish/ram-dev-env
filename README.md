@@ -362,6 +362,7 @@ When the image is ready for distributing to others, you should clean it.
 This will make the image more like a first boot by removing some files that are touched during the setup process.
 
 ```sh
+vm$ sudo apt autoremove
 vm$ ~/.dev-env/bin/ram clean-image
 ```
 
