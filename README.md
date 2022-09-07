@@ -407,7 +407,7 @@ When you are making changes to the code, especially non-trivial changes, test it
 If the changes are small and you finish them in a single session this can be done all on your computer, then pushing to master once you've tested.
 Though it is still suggested to make a feature branch on your PC to make it more difficult to accidentally push broken code to master.
 
-If you're working on a feature for a longer period of time, with other people, than push your feature branch to the remote for the sake of collaboration and backups.
+If you're working on a feature for a longer period of time, with other people, then push your feature branch to the remote for the sake of collaboration and backups.
 
 ## Conventions
 ### Meaning of each of our Ansible roles
