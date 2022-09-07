@@ -1,3 +1,8 @@
+- name: Generate an SSH keypair for authenticating with Git remote
+  community.crypto.openssh_keypair:
+    path: "{{ ssh_keypair_path }}"
+    type: ed25519
+
 - name: Showing your SSH public key
   block:
     - name: Get SSH public key
