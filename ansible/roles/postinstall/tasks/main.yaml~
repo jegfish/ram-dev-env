@@ -1,2 +1,0 @@
-- name: Include SSH key setup
-  include_tasks: ssh.yaml
