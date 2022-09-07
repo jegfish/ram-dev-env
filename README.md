@@ -390,6 +390,8 @@ Create a Zip file, 7zip file, compressed tarfile, etc.
 Zip files can be easily decompressed on MacOS and MS Windows without installing additional software (and most Linux distributions), so they are generally a good format.
 You may want to set the compression to the highest level to get the minimum file size; on the command-line utility from Info-ZIP you can use the `-9` option to do this.
 
+Keep the uncompressed copy, at least for now, as you will need it for converting to other image formats.
+
 ### Converting to other image formats
 
 Formats:
