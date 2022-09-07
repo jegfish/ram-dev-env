@@ -37,7 +37,7 @@
         - [Initial setup](#initial-setup)
             - [OS Installation](#os-installation)
             - [Clone Git repo](#clone-git-repo)
-        - [Pre-provisioning](#pre-provisioning)
+        - [Provisioning the base image](#provisioning-the-base-image)
         - [Cleaning base image](#cleaning-base-image)
             - [Some automatic cleaning](#some-automatic-cleaning)
             - [Clearing first-time GUI popups](#clearing-first-time-gui-popups)
@@ -48,11 +48,15 @@
         - [Converting to other image formats](#converting-to-other-image-formats)
     - [Suggestions](#suggestions)
         - [Work on feature branches, keep the main 'master' branch working](#work-on-feature-branches-keep-the-main-master-branch-working)
+    - [Conventions](#conventions)
+        - [Meaning of each of our Ansible roles](#meaning-of-each-of-our-ansible-roles)
     - [README table of contents](#readme-table-of-contents)
     - [Arm GNU Toolchain](#arm-gnu-toolchain)
     - [Ansible](#ansible)
         - [Documentation](#documentation)
         - [Print all Ansible facts](#print-all-ansible-facts)
+    - [Saving space](#saving-space)
+        - [Listing installed apt packages based on how much space they take](#listing-installed-apt-packages-based-on-how-much-space-they-take)
 
 <!-- markdown-toc end -->
 
