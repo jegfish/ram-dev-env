@@ -14,9 +14,10 @@
     update_cache: yes
     name:
       - screen
+      - gdb
       - openocd
       - lm4flash
-      - astyle # code auto-formatter
+      - astyle
 
 - name: Install Arm GNU Toolchain
   block:

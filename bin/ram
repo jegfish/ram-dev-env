@@ -16,10 +16,15 @@ usage: $cmd_name <command>
     Ensures that your Robotics at Maryland development environment is setup.
     Can be run multiple times, and will update your environment if new configuration changes have been pushed to the remote Git repository.
 
-  $cmd_name provision
+  Warning: The '$cmd_name image' commands are not intended for use by end-users.
+    They are only for creating a base virtual machine image to distribute to others.
+    If you're just setting up your personal environment, use '$cmd_name setup'.
+    These operations can be destructive.
+
+  $cmd_name image provision
     Run the Ansible playbook, skipping tasks tagged with 'postinstall'. Intended to be used when creating a base VM image to distribute to others.
     Note: Does not download the latest configuration.
-  $cmd_name clean-image
+  $cmd_name image clean
     For running after provisioning with the intent of distributing the VM image to others. Removes things such as shell history files.
 EOF
 }
@@ -69,22 +74,36 @@ check_os
 # If setup services that should be accessible from outside the VM from the network, definitely secure it somehow.
 # Eventually we may include changing the password as a post-installation step.
 
+subcommand_image() {
+    case "$1" in
+        provision)
+            ensure_ansible
+            ~/.local/bin/ansible-playbook --skip-tags postinstall --inventory "${ansible_root}/hosts" "${ansible_root}/playbook.yaml" --extra-vars='ansible_become_pass=password'
+            ;;
+        clean)
+            # Clear history.
+            rm -f ~/.lesshst
+            rm -f ~/.sudo_as_admin_successful
+            rm -f ~/.cache/motd.legal-displayed
+            echo "To clear Bash shell history and quit, run 'history -c && history -w && exit'."
+            ;;
+        *)
+            usage
+            ;;
+    esac
+}
+
 case "$1" in
-    provision)
-        ensure_ansible
-        ~/.local/bin/ansible-playbook --skip-tags postinstall --inventory "${ansible_root}/hosts" "${ansible_root}/playbook.yaml" --extra-vars='ansible_become_pass=password'
+    image)
+        shift
+        subcommand_image "$@"
         ;;
     setup)
         ensure_ansible
         ram_update
-        ~/.local/bin/ansible-playbook --inventory "${ansible_root}/hosts" "${ansible_root}/playbook.yaml" --extra-vars='ansible_become_pass=password'
-        ;;
-    clean-image)
-        # Clear history.
-        rm -f ~/.lesshst
-        rm -f ~/.sudo_as_admin_successful
-        rm -f ~/.cache/motd.legal-displayed
-        echo "To clear Bash shell history and quit, run 'history -c && history -w && exit'."
+        # Skip Ansible tasks tagged with 'base', as those are just defaults.
+        # This allows the user to override the defaults without 'ram setup' undoing their work.
+        ~/.local/bin/ansible-playbook --skip-tags base --inventory "${ansible_root}/hosts" "${ansible_root}/playbook.yaml" --extra-vars='ansible_become_pass=password'
         ;;
     *)
         usage

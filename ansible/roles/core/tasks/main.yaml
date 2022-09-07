@@ -1,10 +1,6 @@
-- name: Include installation of miscellaneous packages
-  include_tasks: packages.yaml
 - name: Include ROS
   include_tasks: ros.yaml
 - name: Include Tiva software setup
   include_tasks: tiva.yaml
 - name: Include setup of workspace
   include_tasks: config.yaml
-- name: Include GUI installation and configuration
-  include_tasks: gui.yaml

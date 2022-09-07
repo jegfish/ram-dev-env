@@ -1,0 +1,40 @@
+# You can still uninstall these if you wish, but we suggest keeping them as tend to be small and occasionally very useful.
+# Our code does not depend on these packages.
+- name: Install strongly recommended packages
+  become: yes
+  apt:
+    name:
+      - vim
+      - nano
+      - magic-wormhole
+      - rlwrap
+      - pdfgrep
+      - git-annex
+      - git-lfs
+      - trash-cli
+      - extundelete
+      - shellcheck
+      - valgrind
+      - tree
+
+# You can use a different desktop environment.
+# As long as nothing breaks you can even disable or uninstall the desktop environment and work over SSH.
+#
+# Note: Our Gazebo simulation is a GUI app.
+# Make sure you have whatever packages are necessary to still run that.
+# If you are working over SSH, you'll still want a desktop environment or X forwarding (or similar) for when you are using Gazebo.
+- name: Install Ubuntu desktop environment
+  become: yes
+  apt:
+    name:
+      - ubuntu-desktop
+
+# It's 100% fine to uninstall any of these.
+- name: Install lightly recommended packages
+  become: yes
+  apt:
+    name:
+      - neovim
+      - emacs
+      - tmux
+      - byobu

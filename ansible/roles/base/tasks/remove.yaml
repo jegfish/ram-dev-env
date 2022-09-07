@@ -1,0 +1,10 @@
+# You can install these packages if you wish.
+# They are just removed from the base image to save space and with the expectation that they are unlikely to be used.
+- name: Remove packages
+  become: yes
+  apt:
+    state: absent
+    name:
+      - thunderbird
+      - libreoffice-core
+      - libreoffice-common

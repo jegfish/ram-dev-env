@@ -3,6 +3,8 @@
   vars:
     ssh_keypair_path: '~/.ssh/id-ram_ed25519'
   roles:
-    - role: software
+    - role: base
+      tags: [ base ]
+    - role: core
     - role: postinstall
       tags: [ postinstall ]

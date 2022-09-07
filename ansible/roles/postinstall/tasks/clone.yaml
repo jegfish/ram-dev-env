@@ -7,7 +7,7 @@
     - name: Print public key
       ansible.builtin.debug:
         msg: "Open https://gitlab.com/-/profile/keys in your browser. Your public key is: '{{ pubkey.stdout }}'"
-    
+
 - name: Please upload your SSH public key to GitLab
   ansible.builtin.pause:
     prompt: |
@@ -31,7 +31,7 @@
     dest: ~/qubo/src/qubo_gazebo
     update: no
     accept_newhostkey: yes
-  
+
 - name: Clone embedded software Git repo
   ansible.builtin.git:
     repo: 'git@gitlab.com:robotics-at-maryland/software/qubo-embedded.git'

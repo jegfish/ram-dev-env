@@ -316,26 +316,26 @@ Clone this Git repository to the VM, to the directory `~/.dev-env/`.
 vm$ git clone https://gitlab.com/robotics-at-maryland/dev-env.git ~/.dev-env
 ```
 
-### Pre-provisioning
+### Provisioning the base image
 
 Some parts of the setup take a long time, but can be done ahead-of-time.
 For example, upgrading and installing packages.
 Pre-provisioning performs only the operations that can be done ahead-of-time.
 
-Note: Unlike `ram setup`, `ram provision` does not automatically update to the latest version of the remote Git repository's 'master' branch.
+Note: Unlike `ram setup`, `ram image provision` does not automatically update to the latest version of the remote Git repository's 'master' branch.
 If you have made changes to the remote since cloning, do a `git pull` first.
 
 ```sh
 vm$ sudo apt update && sudo apt upgrade -y
-vm$ ~/.dev-env/bin/ram provision
+vm$ ~/.dev-env/bin/ram image provision
 vm$ # Or, all at once:
-vm$ sudo apt update && sudo apt upgrade -y && ~/.dev-env/bin/ram provision
+vm$ sudo apt update && sudo apt upgrade -y && ~/.dev-env/bin/ram image provision
 ```
 
 It can take upwards of 50 minutes (mostly depending on network connection).
 Ideally you should only be asked for the password or other input once, so that you can do something else while it's running.
-`ram provision` only asks for input once at the start.
-However, if you run the commands all-at-once the `sudo` password cache may time out, so you may have to type your password twice: once for `apt update` and `apt upgrade`, then once for the beginning of `ram provision`.
+`ram image provision` only asks for input once at the start.
+However, if you run the commands all-at-once the `sudo` password cache may time out, so you may have to type your password twice: once for `apt update` and `apt upgrade`, then once for the beginning of `ram image provision`.
 In practice this has not happened and it is suggested that you run them all at once so that you can do something else while it's running.
 
 ### Cleaning base image
@@ -347,7 +347,7 @@ This will make the image more like a first boot by removing some files that are 
 
 ```sh
 vm$ sudo apt autoremove
-vm$ ~/.dev-env/bin/ram clean-image
+vm$ ~/.dev-env/bin/ram image clean
 ```
 
 Follow any instructions it gives you.
@@ -409,6 +409,32 @@ Though it is still suggested to make a feature branch on your PC to make it more
 
 If you're working on a feature for a longer period of time, with other people, than push your feature branch to the remote for the sake of collaboration and backups.
 
+## Conventions
+### Meaning of each of our Ansible roles
+
+We have 3 roles:
+
+- base
+  - Things to be included in the base image distributed to members.
+  - Defaults that can be overriden.
+    - Packages to install by default, packages to remove from the base Ubuntu by default.
+    - Should be preference-based. Anything that we absolutely require should instead be in core.
+  - Run by `ram image provision`.
+  - NOT run by `ram setup`.
+    - This fact allows users to override the defaults.
+- core
+  - Things to be included in the base image distributed to members.
+  - Cannot be overridden by users.
+  - Run by `ram setup`.
+  - Run by `ram image provision`.
+  - Anything that our code or configuration depends on should be in here unless it has to be in postinstall.
+- postinstall
+  - Run by `ram setup`.
+  - NOT run by `ram image provision`.
+
+Reasoning for including certain things in the base image is to save the user's time.
+Full install and configuration can an hour or longer, so do as much as possible ahead of time.
+
 ## README table of contents
 
 The table of contents at the top of this README was automatically generated with the Emacs package [markdown-toc](https://github.com/ardumont/markdown-toc).
@@ -460,3 +486,13 @@ It has plenty of usage examples along with the listing of all possible arguments
 ansible localhost -m setup
 ```
 
+## Saving space
+### Listing installed apt packages based on how much space they take
+
+https://unix.stackexchange.com/a/107039
+
+```sh
+vm$ dpkg-query -Wf '${db:Status-Status} ${Installed-Size}\t${Package}\n' | sed -ne 's/^installed //p'|sort -nr
+```
+
+You'll want to pipe this into a pager such as `less`.

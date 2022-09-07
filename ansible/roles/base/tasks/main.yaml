@@ -1,0 +1,6 @@
+- name: Include installation of suggested packages
+  include_tasks: install.yaml
+- name: Include removal of packages
+  include_tasks: remove.yaml
+- name: Include installation of Visual Studio Code
+  include_tasks: visual-studio-code.yaml
