@@ -4,3 +4,5 @@
   include_tasks: tiva.yaml
 - name: Include setup of workspace
   include_tasks: config.yaml
+- name: Include other setup tasks
+  include_tasks: other.yaml

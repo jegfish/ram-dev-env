@@ -1,0 +1,5 @@
+- name: Install dependencies for working on the ram.umd.edu website
+  become: yes
+  apt:
+    name:
+      - jekyll
