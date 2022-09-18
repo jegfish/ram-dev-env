@@ -238,6 +238,24 @@ TODO
 `systemctl start libvirtd`
 `systemctl start virtnetworkd`
 
+## Black screen "kernel panic" on VirtualBox
+
+1. Open settings for your virtual machine
+2. Go to "System"
+3. Go to "Processor" tab
+4. Set the number of processors to 2.
+
+For some reason there is something wrong with having 1 processor, but 2 works.
+
+Source: https://askubuntu.com/a/1414397
+
+## VirtualBox I/O Cache error
+
+1. Open settings for your virtual machine
+2. Go to "Storage"
+3. Click on the "Controller: SATA"
+4. Make sure "Use Host I/O Cache" is checked/enabled.
+
 ## Gazebo simulation black screen on Apple silicon Mac
 
 We have not tested it yet, but there seems to be a solution in this Reddit thread: https://www.reddit.com/r/ROS/comments/qhk6s3/gazebo_m1_virtual_machine/
