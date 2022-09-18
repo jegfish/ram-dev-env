@@ -126,6 +126,20 @@ Jump to [next step](#2-log-in-to-the-virtual-machine).
 
 Jump to [next step](#2-log-in-to-the-virtual-machine).
 
+#### Setting up clipboard sharing (copy and paste between the VM and your host OS)
+
+##### Setup VirtualBox Guest Additions in the VM
+
+https://linuxize.com/post/how-to-install-virtualbox-guest-additions-in-ubuntu/
+
+##### Enable clipboard sharing
+
+In the main VirtualBox window with your list of VMs, select your Robotics at Maryland VM, then click "Settings".
+
+1. You should already be in the "General" section of settings.
+2. Click the "Advanced" tab.
+3. Change the "Shared Clipboard" setting to the value "Bidirectional".
+
 ### virt-manager
 
 #### Installing
