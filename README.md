@@ -146,7 +146,7 @@ Jump to [next step](#2-log-in-to-the-virtual-machine).
 
 #### Creating the VM
 
-**TODO**
+[Instructions for UTM](https://gitlab.com/robotics-at-maryland/wiki/-/wikis/Setting-up-the-development-environment-on-an-Arm-Apple-silicon-Mac)
 
 Jump to [next step](#2-log-in-to-the-virtual-machine).
 
