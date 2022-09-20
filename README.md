@@ -266,7 +266,7 @@ While the simulation is running, open another terminal and run the following com
 vm:~$ python ~/qubo/src/qubo_gazebo/scripts/teleop.py
 ```
 
-You should now be able to drive Qubo around in the simulation using the arrow keys or WASD.
+You should now be able to drive Qubo around in the simulation using the arrow keys (up, down, turn left, turn right) and WASD (forward, backward, left, right).
 
 ### Build the embedded code
 
