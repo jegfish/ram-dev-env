@@ -9,6 +9,7 @@
 
       export QUBO_PATH=~/qubo
       export GAZEBO_MODEL_PATH="$QUBO_PATH/src/qubo_gazebo/nbrf:$GAZEBO_MODEL_PATH"
+      source /opt/ros/melodic/setup.bash
       source "$QUBO_PATH/devel/setup.bash"
 
 - name: Create directories
