@@ -268,6 +268,14 @@ vm:~$ python ~/qubo/src/qubo_gazebo/scripts/teleop.py
 
 You should now be able to drive Qubo around in the simulation using the arrow keys or WASD.
 
+### Build the embedded code
+
+```sh
+vm:~$ cd ~/qubo/src/qubo_embedded
+vm:~$ make drivers -B
+vm:~$ make
+```
+
 # Issues
 
 ## `Failed to connect socket to '/var/run/libvirt/virtnetworkd-sock-ro': No such file or directory`
