@@ -249,7 +249,24 @@ If something went wrong:
 
 ### Run the simulation of Qubo
 
-TODO
+This requires that you have run `catkin build` in `~/qubo/`, so do that first if you haven't already.
+
+```sh
+vm:~$ source ~/.bashrc
+vm:~$ roslaunch qubo_gazebo nbrfQubo.launch
+```
+
+A GUI window of an app called Gazebo should popup with a simulation of Qubo in a pool.
+
+#### Teleop
+
+While the simulation is running, open another terminal and run the following commands:
+
+```sh
+vm:~$ python ~/qubo/src/qubo_gazebo/scripts/teleop.py
+```
+
+You should now be able to drive Qubo around in the simulation using the arrow keys or WASD.
 
 # Issues
 
