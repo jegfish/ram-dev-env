@@ -6,5 +6,5 @@ network:
   ethernets:
     id0:
       match:
-        name: enp*
+        name: en*
       dhcp4: yes
