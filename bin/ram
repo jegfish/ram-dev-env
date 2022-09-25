@@ -54,7 +54,8 @@ check_os() {
 # Updating is important so that we don't have to create new base images too frequently.
 ram_update() {
     echo "Downloading latest dev-env configuration."
-    git --git-dir="$HOME"/.dev-env/.git/ --work-tree="$HOME"/.dev-env/ pull
+    dev_env_dir="$(dirname "$0")/.."
+    git --git-dir="${dev_env_dir}/.git/" --work-tree="${dev_env_dir}/.dev-env/" pull
 }
 
 # Some sanity checks.
