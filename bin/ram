@@ -85,7 +85,7 @@ subcommand_image() {
             rm -f ~/.lesshst
             rm -f ~/.sudo_as_admin_successful
             rm -f ~/.cache/motd.legal-displayed
-            echo "To clear Bash shell history and quit, run 'history -c && history -w && exit'."
+            echo "To clear Bash shell history and quit, run 'history -c && history -w && exit'. If you're using Zsh, run 'history -p && exit'"
             ;;
         *)
             usage
