@@ -12,6 +12,20 @@
       source /opt/ros/melodic/setup.bash
       source "$QUBO_PATH/devel/setup.bash"
 
+- name: Configure Zsh
+  blockinfile:
+    path: '~/.zshrc'
+    create: yes
+    marker: "# {mark} ANSIBLE MANAGED BLOCK"
+    block: |
+      export PATH="$PATH:$HOME/.dev-env/bin"
+      export PATH="$PATH:$HOME/.local/bin"
+
+      export QUBO_PATH=~/qubo
+      export GAZEBO_MODEL_PATH="$QUBO_PATH/src/qubo_gazebo/nbrf:$GAZEBO_MODEL_PATH"
+      source /opt/ros/melodic/setup.zsh
+      source "$QUBO_PATH/devel/setup.zsh"
+
 - name: Create directories
   file:
     path: '~/qubo/src'
