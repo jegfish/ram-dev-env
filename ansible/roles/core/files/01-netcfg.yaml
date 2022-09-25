@@ -8,3 +8,4 @@ network:
       match:
         name: en*
       dhcp4: yes
+      dhcp6: yes
