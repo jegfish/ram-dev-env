@@ -253,6 +253,7 @@ This requires that you have run `catkin build` in `~/qubo/`, so do that first if
 
 ```sh
 vm:~$ source ~/.bashrc
+# or source ~/.zshrc if you're using Zsh
 vm:~$ roslaunch qubo_gazebo nbrfQubo.launch
 ```
 
