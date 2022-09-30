@@ -49,6 +49,7 @@
       ansible.builtin.unarchive:
         src: "{{ role_path }}/build/{{ arm_toolchain_archive_name }}"
         dest: ~/.local/
+        creates: ~/.local/arm-none-eabi
         extra_opts:
           - --transform
           - "s/^{{ arm_toolchain_extracted_dirname }}//"
