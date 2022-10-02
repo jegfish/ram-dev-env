@@ -55,7 +55,7 @@ check_os() {
 ram_update() {
     echo "Downloading latest dev-env configuration."
     dev_env_dir="$(dirname "$0")/.."
-    git --git-dir="${dev_env_dir}/.git/" --work-tree="${dev_env_dir}/.dev-env/" pull
+    git --git-dir="${dev_env_dir}/.git/" --work-tree="${dev_env_dir}/" pull
 }
 
 # Some sanity checks.
