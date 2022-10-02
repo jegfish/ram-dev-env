@@ -64,3 +64,5 @@
     group: root
     mode: u=rw,g=r,o=r
   notify: Apply netplan configuration
+  # Don't run when in Distrobox because it doesn't use Netplan.
+  when: ansible_env["DISTROBOX_ENTER_PATH"] is not defined
