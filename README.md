@@ -137,6 +137,10 @@ Jump to [next step](#2-log-in-to-the-virtual-machine).
 
 https://linuxize.com/post/how-to-install-virtualbox-guest-additions-in-ubuntu/
 
+##### Improve screen resolution/quality
+
+In the menu bar of the running VM window, select View. Then select "Virtual Screen 1". Then resize it to a higher resolution. From now on it should automatically adjust the resolution based on the window size, and give you higher resolution.
+
 ##### Enable clipboard sharing
 
 In the main VirtualBox window with your list of VMs, select your Robotics at Maryland VM, then click "Settings".
