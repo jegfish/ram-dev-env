@@ -34,7 +34,7 @@ ensure_ansible() {
 
     # python3.8: required for Ansible
     # rustc, cargo: required for building Ansible pip packages or its dependencies
-    sudo apt install -y python3.8 python3-pip rustc cargo
+    sudo apt install -y python3.8 python3-pip rustc cargo git
 
     # upgrade pip
     python3.8 -m pip install -U pip
