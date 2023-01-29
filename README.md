@@ -127,7 +127,26 @@ Jump to [next step](#2-log-in-to-the-virtual-machine).
 
 #### Creating the VM
 
-**TODO**
+1. Open the VirtualBox GUI
+2. Click "New" to start creating a new VM
+3. Fill in the information, then click "Next".
+    - Give the VM a name
+    - Type: Linux
+    - Version: Ubuntu (64-bit)
+
+    - ![](./pictures/virtualbox-1.png)
+
+4. We recommend giving the VM at least 2048 MB (2 GB) of memory. If you have enough memory on your computer, giving it more can be helpful.
+5. You will now import the VM hard disk file that you downloaded from us. Important note: VirtualBox does not make a copy of an imported virtual hard disk file. You will need to keep that unzipped `.vdi` file around, it is where all your new VM data will be stored. Most of your important data should end up on GitLab or similar, but you should still be careful to not unintentionally delete the VM's data.
+    - Select "Use an existing virtual hard disk file".
+      ![](./pictures/virtualbox-2.png)
+    - Click the small folder icon in the bottom right.
+      ![](./pictures/virtualbox-3.png)
+    - Click the "Add" button. Find and select the VM hard disk file that you downloaded and unzipped, then click "Choose".
+      ![](./pictures/virtualbox-4.png)
+    - Click "Create".
+6. You have successfully created a VM. Now select it and click the "Start" button. You can also double click it to start it.
+    - ![](./pictures/virtualbox-5.png)
 
 Jump to [next step](#2-log-in-to-the-virtual-machine).
 
