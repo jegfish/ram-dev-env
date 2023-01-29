@@ -218,8 +218,8 @@ Jump to [next step](#2-log-in-to-the-virtual-machine).
     The rest of these commands should be run inside of the Distrobox (`distrobox enter` puts you inside). When inside it your shell prompt will probably be something like 'username@distrobox-name'.
 
     ```sh
-    sudo apt -y update && sudo apt upgrade
-    sudo apt -y install lsb-release git
+    sudo apt update && sudo apt upgrade -y
+    sudo apt install -y lsb-release git
     git clone https://gitlab.com/robotics-at-maryland/dev-env.git ~/.dev-env
     ~/.dev-env/bin/ram setup
     ```
