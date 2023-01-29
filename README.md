@@ -6,20 +6,26 @@
 - [Table of Contents](#table-of-contents)
 - [Development Environment Setup Instructions](#development-environment-setup-instructions)
     - [1. Setup virtual machine software](#1-setup-virtual-machine-software)
-        - [VMWare](#vmware)
+        - [VirtualBox](#virtualbox)
             - [Installing](#installing)
             - [Creating the VM](#creating-the-vm)
-        - [VirtualBox](#virtualbox)
-            - [Installing](#installing-1)
-            - [Creating the VM](#creating-the-vm-1)
+            - [Improving speed](#improving-speed)
+                - [Increasing the number of VM processors](#increasing-the-number-of-vm-processors)
+                - [Increasing amount of provided video memory](#increasing-amount-of-provided-video-memory)
             - [Setting up clipboard sharing (copy and paste between the VM and your host OS)](#setting-up-clipboard-sharing-copy-and-paste-between-the-vm-and-your-host-os)
                 - [Setup VirtualBox Guest Additions in the VM](#setup-virtualbox-guest-additions-in-the-vm)
                 - [Enable clipboard sharing](#enable-clipboard-sharing)
-        - [virt-manager](#virt-manager)
-            - [Installing](#installing-2)
-            - [Creating the VM](#creating-the-vm-2)
         - [UTM](#utm)
+            - [Installing](#installing-1)
+            - [Creating the VM](#creating-the-vm-1)
+        - [Distrobox](#distrobox)
+            - [Installing](#installing-2)
+            - [Creating the Distrobox container](#creating-the-distrobox-container)
+        - [VMWare](#vmware)
             - [Installing](#installing-3)
+            - [Creating the VM](#creating-the-vm-2)
+        - [virt-manager](#virt-manager)
+            - [Installing](#installing-4)
             - [Creating the VM](#creating-the-vm-3)
     - [2. Log in to the virtual machine](#2-log-in-to-the-virtual-machine)
     - [3. Run the setup script](#3-run-the-setup-script)
@@ -85,8 +91,8 @@ Suggestions:
 
 - If you are using Windows or an Intel Mac:
   - Use VirtualBox.
-  - VMWare is also a good choice, but is a bit annoying to install because it requires going through TerpWare to get a student license from UMD.
 - If you are using Linux:
+  - Use Distrobox. Instead of a VM it is a container-based solution. Basically it doesn't have to run an entire separate operating system, so it is a lot faster and tends to work better.
   - Use virt-manager. You can also use another frontend (like GNOME Boxes) for the underlying QEMU/Libvirt/KVM technologies, but we have tested virt-manager and can help with it.
   - VirtualBox and VMWare also support Linux. However,
     - We've found some things worked automatically in virt-manager while requiring difficult configuration in VirtualBox.
@@ -98,26 +104,11 @@ If you are willing, please contribute instructions for additional VM software.
 
 Jump to the instructions for your VM software:
 
-- [VMWare](#vmware)
 - [VirtualBox](#virtualbox)
-- [virt-manager](#virt-manager)
 - [UTM](#utm)
-
-### VMWare
-
-#### Installing
-
-1. Go to TerpWare: https://terpware.umd.edu
-   - VMWare Academic Software is listed under the "Utilities" category.
-2. Go through the process of registering for and installing VMWare.
-   - VMWare Workstation is for Windows and Linux
-   - VMWare Fusion is for Intel-based Macs, but may have a version for Apple ARM CPUs.
-
-#### Creating the VM
-
-**TODO**
-
-Jump to [next step](#2-log-in-to-the-virtual-machine).
+- [Distrobox](#distrobox)
+- [VMWare](#vmware)
+- [virt-manager](#virt-manager)
 
 ### VirtualBox
 
@@ -145,10 +136,27 @@ Jump to [next step](#2-log-in-to-the-virtual-machine).
     - Click the "Add" button. Find and select the VM hard disk file that you downloaded and unzipped, then click "Choose".
       ![](./pictures/virtualbox-4.png)
     - Click "Create".
-6. You have successfully created a VM. Now select it and click the "Start" button. You can also double click it to start it.
+6. In the main VirtualBox GUI window select the VM you just created, then click "Settings".
+7. In the "Display" settings section, "Screen" sub-section, make sure the checkbox "Enable 3D Acceleration" is checked/enabled.
+8. You have successfully created a VM. Now select it and click the "Start" button. You can also double click it to start it.
     - ![](./pictures/virtualbox-5.png)
 
 Jump to [next step](#2-log-in-to-the-virtual-machine).
+
+#### Improving speed
+
+##### Increasing the number of VM processors
+
+1. In the main VirtualBox GUI window select your R@M VM, then click "Settings".
+2. In the "System" settings section, "Processor" sub-section, increase the number of processors.
+    - This feature requires hardware virtualization support to work, so if your VM doesn't work after this make sure that your CPU supports hardware virtualization, and make sure that it is enabled. How to do this will depend on your CPU and computer, but you may have to turn it on in BIOS.
+
+##### Increasing amount of provided video memory
+
+We have not tested this much, so we don't know for sure whether this will help.
+
+1. In the main VirtualBox GUI window select your R@M VM, then click "Settings".
+2. In the "Display" settings section, "Screen" sub-section, increase the amount of video memory.
 
 #### Setting up clipboard sharing (copy and paste between the VM and your host OS)
 
@@ -168,18 +176,6 @@ In the main VirtualBox window with your list of VMs, select your Robotics at Mar
 2. Click the "Advanced" tab.
 3. Change the "Shared Clipboard" setting to the value "Bidirectional".
 
-### virt-manager
-
-#### Installing
-
-**TODO**
-
-#### Creating the VM
-
-**TODO**
-
-Jump to [next step](#2-log-in-to-the-virtual-machine).
-
 ### UTM
 
 #### Installing
@@ -189,6 +185,71 @@ Jump to [next step](#2-log-in-to-the-virtual-machine).
 #### Creating the VM
 
 [Instructions for UTM](https://gitlab.com/robotics-at-maryland/wiki/-/wikis/Setting-up-the-development-environment-on-an-Arm-Apple-silicon-Mac)
+
+Jump to [next step](#2-log-in-to-the-virtual-machine).
+
+### Distrobox
+
+#### Installing
+
+- Installation instructions: <https://distrobox.privatedns.org/#installation>
+- If it is listed as packaged for your particular Linux distribution and distribution version, use your package manager to install it.
+  It's probably under the package name 'distrobox'.
+- Otherwise, follow one of the "Alternative methods" listed in the linked instructions for installing Distrobox.
+- Install a container manager, either [Podman](https://podman.io/) or [Docker](https://www.docker.com/). Docker is the more popular option, so it is likely in your distributions' package manager.
+    - Note: Under Debian and Debian-based distributions (like Ubuntu), the package is called `docker.io`, NOT `docker`.
+
+#### Creating the Distrobox container
+
+1. We first need to create a separate home directory for the container, as the R@M environment modifies configuration files such as `~/.bashrc`, and there is currently no uninstall process. So DO NOT run the R@M automated setup on a personal installation of Linux or macOS! As of right now you should only be running it in a VM or container.
+    - What I do is create a directory `~/distrobox/`, and then have other directories such as `~/distrobox/ram/` inside it for my different Distroboxes that need their own home directories. The location doesn't matter, this is just a suggestion.
+    - Run the following terminal commands:
+
+      ```sh
+      mkdir -p ~/distrobox/ram
+      distrobox create --image ubuntu:bionic --name ram --home ~/distrobox/ram
+      ```
+2. Now "enter" the Distrobox and perform the rest of the setup. Note that the Distrobox is not strongly separated from your computer. You can still access all the same files, which is convenient, but be careful as you can also delete or mangle your regular files. However the core operating system is mostly separate, so `sudo` generally doesn't require a password and is different from the `sudo` outside of the Distrobox. You can install different packages/software and different versions of packages.
+
+    ```sh
+    distrobox enter ram
+    ```
+
+    The rest of these commands should be run inside of the Distrobox (`distrobox enter` puts you inside). When inside it your shell prompt will probably be something like 'username@distrobox-name'.
+
+    ```sh
+    sudo apt -y update && sudo apt upgrade
+    sudo apt -y install lsb-release git
+    git clone https://gitlab.com/robotics-at-maryland/dev-env.git ~/.dev-env
+    ~/.dev-env/bin/ram setup
+    ```
+3. Now go to these instructions: [Run the setup commands](#run-the-setup-commands)
+
+### VMWare
+
+#### Installing
+
+1. Go to TerpWare: https://terpware.umd.edu
+   - VMWare Academic Software is listed under the "Utilities" category.
+2. Go through the process of registering for and installing VMWare.
+   - VMWare Workstation is for Windows and Linux
+   - VMWare Fusion is for Intel-based Macs, but may have a version for Apple ARM CPUs.
+
+#### Creating the VM
+
+**TODO**
+
+Jump to [next step](#2-log-in-to-the-virtual-machine).
+
+### virt-manager
+
+#### Installing
+
+**TODO**
+
+#### Creating the VM
+
+**TODO**
 
 Jump to [next step](#2-log-in-to-the-virtual-machine).
 
