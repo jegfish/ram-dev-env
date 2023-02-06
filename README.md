@@ -124,6 +124,7 @@ Jump to the instructions for your VM software:
     - Give the VM a name
     - Type: Linux
     - Version: Ubuntu (64-bit)
+        - Note: You may have more specific options. In that case, our particular version of Ubuntu is called Ubuntu 18.04 Bionic LTS (64-bit).
 
     - ![](./pictures/virtualbox-1.png)
 
