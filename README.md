@@ -171,11 +171,8 @@ In the menu bar of the running VM window, select View. Then select "Virtual Scre
 
 ##### Enable clipboard sharing
 
-In the main VirtualBox window with your list of VMs, select your Robotics at Maryland VM, then click "Settings".
-
-1. You should already be in the "General" section of settings.
-2. Click the "Advanced" tab.
-3. Change the "Shared Clipboard" setting to the value "Bidirectional".
+1. In the main VirtualBox GUI window select your R@M VM, then click "Settings".
+2. In the "General" settings section, "Advanced" tab/sub-section, change the "Shared Clipboard" setting to the value "Bidirectional".
 
 ### UTM
 
@@ -381,12 +378,10 @@ Source: https://askubuntu.com/a/1414397
 
 ## VirtualBox stuck at boot, never finishes booting
 
-Try turning 3D acceleration off, then booting, then turn 3D acceleration on again later.
-
-To turn 3D acceleration off:
+Try increasing the amount of video memory given to the VM.
 
 1. In the main VirtualBox GUI window select your R@M VM, then click "Settings".
-2. In the "Display" settings section, "Screen" sub-section, disable the checkbox "Enable 3D Acceleration".
+2. In the "Display" settings section, "Screen" sub-section, increase the amount of video memory.
 
 ## VirtualBox I/O Cache error
 
