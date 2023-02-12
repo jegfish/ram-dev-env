@@ -114,7 +114,7 @@ Jump to the instructions for your VM software:
 
 #### Installing
 
-**TODO**
+Follow the download/installation instructions to install Oracle VirtualBox: https://www.virtualbox.org/wiki/Downloads
 
 #### Creating the VM
 
