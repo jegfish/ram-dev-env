@@ -379,6 +379,15 @@ For some reason there is something wrong with having 1 processor, but 2 works.
 
 Source: https://askubuntu.com/a/1414397
 
+## VirtualBox stuck at boot, never finishes booting
+
+Try turning 3D acceleration off, then booting, then turn 3D acceleration on again later.
+
+To turn 3D acceleration off:
+
+1. In the main VirtualBox GUI window select your R@M VM, then click "Settings".
+2. In the "Display" settings section, "Screen" sub-section, disable the checkbox "Enable 3D Acceleration".
+
 ## VirtualBox I/O Cache error
 
 1. Open settings for your virtual machine
