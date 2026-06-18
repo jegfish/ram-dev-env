@@ -58,7 +58,7 @@
             - [Compress](#compress)
         - [Converting to other image formats](#converting-to-other-image-formats)
     - [Suggestions](#suggestions)
-        - [Work on feature branches, keep the main 'master' branch working](#work-on-feature-branches-keep-the-main-master-branch-working)
+        - [Work on feature branches, keep the 'main' branch working](#work-on-feature-branches-keep-the-main-branch-working)
     - [Conventions](#conventions)
         - [Meaning of each of our Ansible roles](#meaning-of-each-of-our-ansible-roles)
     - [README table of contents](#readme-table-of-contents)
@@ -282,7 +282,7 @@ The `~` ("tilde") is an abbreviation for your "home" directory, the place where 
 You will usually start out in your home directory.
 
 The commands in this document will be short and you may be using them often, so it could be a good idea to type them out.
-If you decide to use copy and paste, be take care to not copy the prompt.
+If you decide to use copy and paste, take care to not copy the prompt.
 
 So, to run the above command you would type `echo "hello"` into the terminal, then press enter/return to run the command.
 
@@ -398,6 +398,7 @@ We have not tested it yet, but there seems to be a solution in this Reddit threa
 
 ## NFS mount issues on Fedora
 <https://developer.fedoraproject.org/tools/vagrant/vagrant-nfs.html>
+
 # Contributing: Helpful resources for contributing to this code/repository
 ## Creating a base VM image
 
@@ -478,7 +479,7 @@ Some parts of the setup take a long time, but can be done ahead-of-time.
 For example, upgrading and installing packages.
 Pre-provisioning performs only the operations that can be done ahead-of-time.
 
-Note: Unlike `ram setup`, `ram image provision` does not automatically update to the latest version of the remote Git repository's 'master' branch.
+Note: Unlike `ram setup`, `ram image provision` does not automatically update to the latest version of the remote Git repository's 'main' branch.
 If you have made changes to the remote since cloning, do a `git pull` first.
 
 ```sh
@@ -513,7 +514,7 @@ Follow any instructions it gives you.
 Log in to the GUI, then if you get a popup:
 
 - Don't enable LivePatch.
-- Opt-out of telemetry, don't send system information to Canonical.
+- Opt-out of telemetry.
 - If you get a popup asking about upgrading to a newer version of Ubuntu, select the option that amounts to "no, don't ask me again".
   - It doesn't show up right away. If you wait 3 minutes it probably will. Don't wait too long, it's not vital.
 - Go through the rest of the popup wizard.
@@ -556,14 +557,14 @@ Formats:
 
 ## Suggestions
 
-### Work on feature branches, keep the main 'master' branch working
+### Work on feature branches, keep the 'main' branch working
 
-The automation automatically downloads the latest version of itself from the 'master' branch.
-So if you were to push broken code to master, it could break the environment of anyone who runs `ram setup` before a fix is pushed.
+The automation automatically downloads the latest version of itself from the 'main' branch.
+So if you were to push broken code to main, it could break the environment of anyone who runs `ram setup` before a fix is pushed.
 
-When you are making changes to the code, especially non-trivial changes, test it before you push to master.
-If the changes are small and you finish them in a single session this can be done all on your computer, then pushing to master once you've tested.
-Though it is still suggested to make a feature branch on your PC to make it more difficult to accidentally push broken code to master.
+When you are making changes to the code, especially non-trivial changes, test it before you push to main.
+If the changes are small and you finish them in a single session this can be done all on your computer, then pushing to main once you've tested.
+Though it is still suggested to make a feature branch on your PC to make it more difficult to accidentally push broken code to main.
 
 If you're working on a feature for a longer period of time, with other people, then push your feature branch to the remote for the sake of collaboration and backups.
 
@@ -591,7 +592,7 @@ We have 3 roles:
   - NOT run by `ram image provision`.
 
 Reasoning for including certain things in the base image is to save the user's time.
-Full install and configuration can an hour or longer, so do as much as possible ahead of time.
+Full install and configuration can be an hour or longer, so do as much as possible ahead of time.
 
 ## README table of contents
 
@@ -608,7 +609,7 @@ The following Emacs Lisp configuration was used:
 This is the compiler we use for the Tiva.
 
 NOTE: These instructions are for installing the Arm GNU Toolchain ourselves.
-Ideally you would use a package manager.
+Ideally we would use a package manager.
 The reason for the current custom installation is that the version in Ubuntu 18.04's package repos is too old for our code.
 
 Links:
@@ -633,11 +634,6 @@ For the Ansible playbook:
 
 - https://docs.ansible.com/
 
-Usually a web search for "ansible <module/command>" or "ansible <task I want to accomplish>" will tend to find the section of the documentation you want.
-
-If you're trying to use a particular module/command (or your task is accomplished by a module/command) I'd recommend using the official documentation (whether you got there manually or from the web search), as it is quite good.
-It has plenty of usage examples along with the listing of all possible arguments you can pass to modules.
-
 ### Print all Ansible facts
 
 ```sh
@@ -650,7 +646,7 @@ ansible localhost -m setup
 https://unix.stackexchange.com/a/107039
 
 ```sh
-vm$ dpkg-query -Wf '${db:Status-Status} ${Installed-Size}\t${Package}\n' | sed -ne 's/^installed //p'|sort -nr
+vm$ dpkg-query -Wf '${db:Status-Status} ${Installed-Size}\t${Package}\n' | sed -ne 's/^installed //p' | sort -nr
 ```
 
-You'll want to pipe this into a pager such as `less`.
+Then you can look at which unnecessary packages you can remove from the VM image to save space.
